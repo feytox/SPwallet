@@ -9,6 +9,7 @@
     "DearFox"
   ],
   "contact": {
+    "homepage": "https://modrinth.com/mod/spwallet",
     "sources": "https://github.com/feytox/SPwallet",
     "issues": "https://github.com/feytox/SPwallet/issues"
   },
