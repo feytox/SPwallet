@@ -3,7 +3,7 @@
   "id": "spwallet",
   "version": "${version}",
   "name": "#SP wallet",
-  "description": "Мод, показывающий количество ваших АР.",
+  "description": "A mod for counting your diamond ores.",
   "authors": [
     "Feytox",
     "DearFox"
