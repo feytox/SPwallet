@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.feytox.spwallet.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ContainerCountMixin",
+    "InventoryCountMixin",
+    "ShulkerCountMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

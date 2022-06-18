@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "spwallet",
+  "version": "${version}",
+  "name": "SPwallet",
+  "description": "A mod for counting diamond ores (or anything else) in your inventory.",
+  "authors": [
+    "Feytox",
+    "DearFox"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/spwallet/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.feytox.spwallet.client.SPwalletClient"
+    ],
+    "main": [
+      "net.feytox.spwallet.SPwallet"
+    ]
+  },
+  "mixins": [
+    "SPwallet.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.7",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  }
+}
