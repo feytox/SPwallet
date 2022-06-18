@@ -9,60 +9,60 @@ public class SPwalletConfig extends MidnightConfig {
     public static boolean simpleMode = false;
 
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetX = -139;
+    public static int inventoryOffsetX = -24;
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetY = 83;
+    public static int inventoryOffsetY = -84;
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetX_withRecipeBook = -60;
+    public static int inventoryOffsetX_withRecipeBook = -24;
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetY_withRecipeBook = 103;
+    public static int inventoryOffsetY_withRecipeBook = -84;
 
     @Entry(min=-999999, max=999999)
-    public static int chestOffsetX = -139;
+    public static int chestOffsetX = -24;
     @Entry(min=-999999, max=999999)
-    public static int chestOffsetY = 84;
+    public static int chestOffsetY = -84;
 
     @Entry(min=-999999, max=999999)
-    public static int doubleChestOffsetX = -139;
+    public static int doubleChestOffsetX = 89;
     @Entry(min=-999999, max=999999)
-    public static int doubleChestOffsetY = 111;
+    public static int doubleChestOffsetY = -12;
 
     @Entry(min=-999999, max=999999)
     public static int simpleInvX_withRecipeBook = 116;
     @Entry(min=-999999, max=999999)
     public static int simpleInvY_withRecipeBook = 5;
     @Entry(min=-999999, max=999999)
-    public static int simpleInvX = 39;
+    public static int simpleInvX = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleInvY = 16;
+    public static int simpleInvY = 10;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleChestX_inv = 5;
+    public static int simpleChestX_inv = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleChestY_inv = 8;
+    public static int simpleChestY_inv = 10;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleChestX_chest = 5;
+    public static int simpleChestX_chest = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleChestY_chest = -4;
+    public static int simpleChestY_chest = 76;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleChestX_all = 5;
+    public static int simpleChestX_all = 0;
     @Entry(min=-999999, max=999999)
-    public static int simpleChestY_all = -13;
+    public static int simpleChestY_all = 10;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestX_inv = 5;
+    public static int simpleDoubleChestX_inv = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestY_inv = 5;
+    public static int simpleDoubleChestY_inv = -18;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestX_chest = 5;
+    public static int simpleDoubleChestX_chest = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestY_chest = -4;
+    public static int simpleDoubleChestY_chest = 104;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestX_all = 5;
+    public static int simpleDoubleChestX_all = 0;
     @Entry(min=-999999, max=999999)
-    public static int simpleDoubleChestY_all = -13;
+    public static int simpleDoubleChestY_all = -18;
 }
