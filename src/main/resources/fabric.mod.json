@@ -3,12 +3,15 @@
   "id": "spwallet",
   "version": "${version}",
   "name": "SPwallet",
-  "description": "A mod for counting diamond ores (or anything else) in your inventory.",
+  "description": "A mod for counting diamond ores in your inventory.",
   "authors": [
     "Feytox",
     "DearFox"
   ],
-  "contact": {},
+  "contact": {
+    "sources": "https://github.com/feytox/SPwallet",
+    "issues": "https://github.com/feytox/SPwallet/issues"
+  },
   "license": "MIT",
   "icon": "assets/spwallet/icon.png",
   "environment": "client",
