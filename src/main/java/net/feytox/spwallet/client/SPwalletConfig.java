@@ -25,9 +25,9 @@ public class SPwalletConfig extends MidnightConfig {
     @Comment
     public static Comment hotkeysSettings;
     @Entry
-    public static KeybindsEnum selectKeybind_key = KeybindsEnum.W;
+    public static KeybindsEnum selectKeybind_key = KeybindsEnum.MMB;
     @Entry
-    public static KeybindsEnum showCountInStacks_key = KeybindsEnum.D;
+    public static KeybindsEnum showCountInStacks_key = KeybindsEnum.G;
 
     public enum KeybindsEnum {
         VANILLA(-1),
