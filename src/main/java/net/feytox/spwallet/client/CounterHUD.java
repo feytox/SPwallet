@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 import java.util.Objects;
 
+import static net.feytox.spwallet.client.SPwalletClient.convertToInt;
 import static net.feytox.spwallet.client.SPwalletClient.getCoordFromCenter;
 
 public class CounterHUD {
@@ -55,10 +56,11 @@ public class CounterHUD {
                                 invLine_y = getCoordFromCenter("y", SPwalletConfig.simpleDoubleChestY_chest);
                             }
                             default -> {
-                                if (Objects.equals(containerType.substring(0, 3), "inv")) {
+                                if (Objects.equals(containerType.substring(0, 3), "inv") &
+                                        !Objects.equals(containerType, "inv_recipe")) {
                                     invLine_x = getCoordFromCenter("x", SPwalletConfig.simpleChestX_inv);
                                     invLine_y = getCoordFromCenter("y", SPwalletConfig.simpleChestY_inv);
-                                } else {
+                                } else if (!Objects.equals(containerType, "inv_recipe")){
                                     invLine_x = getCoordFromCenter("x", SPwalletConfig.simpleChestX_chest);
                                     invLine_y = getCoordFromCenter("y", SPwalletConfig.simpleChestY_chest);
                                 }
@@ -69,14 +71,19 @@ public class CounterHUD {
 
                 // иконка
                 DrawableHelper.drawTexture(matrices, invLine_x, invLine_y,6, 6,
-                        getIconXByType(containerType), 56, 6, 6, 64, 64);
+                        getIconXByType(containerType), getIconYBySlotsSelected(), 6, 6, 64, 64);
 
-                // Иконки АР
-                DrawableHelper.drawTexture(matrices, invLine_x + 8 + getXByCount(count.get(0)), invLine_y,6, 6,
-                        56, getTextureYByARcount(count.get(0)), 6, 6, 64, 64);
+                String countLine1 = String.valueOf(count.get(0));
+                if (!SPwalletConfig.isCountInStacks | count.get(0) < 64) {
+                    // Иконки АР
+                    DrawableHelper.drawTexture(matrices, invLine_x + 8 + getXByCount(count.get(0)), invLine_y, 6, 6,
+                            56, getTextureYByARcount(count.get(0)), 6, 6, 64, 64);
+                } else {
+                    countLine1 = getCountInStacks(count.get(0));
+                }
 
                 // Число АР
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(String.valueOf(count.get(0))),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
             }
             case 3 -> {
@@ -117,20 +124,35 @@ public class CounterHUD {
                 DrawableHelper.drawTexture(matrices, allLine_x, allLine_y,6, 7,
                         20, 56, 6, 7, 64, 64);
 
-                // Иконки АР
-                DrawableHelper.drawTexture(matrices, invLine_x + 8 + getXByCount(count.get(0)), invLine_y,6, 6,
-                        56, getTextureYByARcount(count.get(0)), 6, 6, 64, 64);
-                DrawableHelper.drawTexture(matrices, chestLine_x + 8 + getXByCount(count.get(1)), chestLine_y,6, 6,
-                        56, getTextureYByARcount(count.get(1)), 6, 6, 64, 64);
-                DrawableHelper.drawTexture(matrices, allLine_x + 8 + getXByCount(count.get(2)), allLine_y,6, 6,
-                        56, getTextureYByARcount(count.get(2)), 6, 6, 64, 64);
+                String countLine1 = String.valueOf(count.get(0));
+                String countLine2 = String.valueOf(count.get(1));
+                String countLine3 = String.valueOf(count.get(2));
+                if (!SPwalletConfig.isCountInStacks | count.get(0) < 64) {
+                    // Иконки АР
+                    DrawableHelper.drawTexture(matrices, invLine_x + 8 + getXByCount(count.get(0)), invLine_y, 6, 6,
+                            56, getTextureYByARcount(count.get(0)), 6, 6, 64, 64);
+                } else {
+                    countLine1 = getCountInStacks(count.get(0));
+                }
+                if (!SPwalletConfig.isCountInStacks | count.get(1) < 64) {
+                    DrawableHelper.drawTexture(matrices, chestLine_x + 8 + getXByCount(count.get(1)), chestLine_y, 6, 6,
+                            56, getTextureYByARcount(count.get(1)), 6, 6, 64, 64);
+                } else {
+                    countLine2 = getCountInStacks(count.get(1));
+                }
+                if (!SPwalletConfig.isCountInStacks | count.get(2) < 64) {
+                    DrawableHelper.drawTexture(matrices, allLine_x + 8 + getXByCount(count.get(2)), allLine_y, 6, 6,
+                            56, getTextureYByARcount(count.get(2)), 6, 6, 64, 64);
+                } else {
+                    countLine3 = getCountInStacks(count.get(2));
+                }
 
                 // Число АР
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(String.valueOf(count.get(0))),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(String.valueOf(count.get(1))),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine2),
                         chestLine_x + 8, chestLine_y - 1, -1);
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(String.valueOf(count.get(2))),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine3),
                         allLine_x + 8, allLine_y - 1, -1);
             }
         }
@@ -174,13 +196,13 @@ public class CounterHUD {
 
     // определение координат оффсета
     private static int getCoordByType(String coordType, String type) {
-        int coord = 0;
+        int coord;
         if ("x".equals(coordType)) {
             switch (type) {
                 case "container.shulkerBox", "container.chest", "container.enderchest", "container.barrel",
                         "inv_container.shulkerBox", "inv_container.chest", "inv_container.enderchest", "inv_container.barrel" ->
                         coord = SPwalletConfig.chestOffsetX;
-                case "container.chestDouble", "inv_container.chestDouble" -> coord = SPwalletConfig.doubleChestOffsetX;
+                case "container.chestDouble", "inv_container.chestDouble", "chest_container.chestDouble" -> coord = SPwalletConfig.doubleChestOffsetX;
                 default -> coord = SPwalletConfig.inventoryOffsetX;
             }
         } else {
@@ -188,16 +210,19 @@ public class CounterHUD {
                 case "container.shulkerBox", "container.chest", "container.enderchest", "container.barrel",
                         "inv_container.shulkerBox", "inv_container.chest", "inv_container.enderchest", "inv_container.barrel" ->
                     coord = SPwalletConfig.chestOffsetY;
-                case "container.chestDouble", "inv_container.chestDouble" -> coord = SPwalletConfig.doubleChestOffsetY;
+                case "container.chestDouble", "inv_container.chestDouble", "chest_container.chestDouble" -> coord = SPwalletConfig.doubleChestOffsetY;
                 default -> coord = SPwalletConfig.inventoryOffsetY;
             }
         }
         return coord;
     }
 
-    public static int getIconXByType(String type) {
+    private static int getIconXByType(String type) {
         int x;
-        if (type.length() == 3 || Objects.equals(type.substring(0, 3), "inv")) {
+        if (SlotsSelector.isSlotsSelected()) {
+            x = 48;
+        }
+        else if (type.length() == 3 || Objects.equals(type.substring(0, 3), "inv")) {
             x = 2;
         } else if (Objects.equals(type.substring(0, 5), "chest")) {
             x = getTextureXByStorage(type.substring(6));
@@ -206,5 +231,23 @@ public class CounterHUD {
             x = getTextureXByStorage(type);
         }
         return x;
+    }
+
+    private static int getIconYBySlotsSelected() {
+        if (SlotsSelector.isSlotsSelected()) {
+            return 0;
+        }
+        return 56;
+    }
+
+    private static String getCountInStacks(int count) {
+        if (count >= 64) {
+            if (count % 64 != 0) {
+                return count / 64 + "." + convertToInt((((double) count) / 64 - count / 64) * 64);
+            } else {
+                return count / 64 + "ст.";
+            }
+        }
+        return String.valueOf(count);
     }
 }

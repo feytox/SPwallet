@@ -1,33 +1,65 @@
 {
   "spwallet.midnightconfig.title": "SPwallet Config",
 
+  "key.category.spwallet": "#SP wallet (Требуется настройка конфига)",
+
+  "spwallet.midnightconfig.mainSettings": "§nБазовые настройки",
+
   "spwallet.midnightconfig.showCounter": "Показывать счётчик",
   "spwallet.midnightconfig.simpleMode": "Простой режим (без плашки)",
-  "spwallet.midnightconfig.inventoryOffsetX": "Смещение плашки (от центра) по Х в инвентаре",
-  "spwallet.midnightconfig.inventoryOffsetY": "Смещение плашки (от центра) по Y в инвентаре",
-  "spwallet.midnightconfig.inventoryOffsetX_withRecipeBook": "Смещение плашки (от центра) по Х в инвентаре (с книгой рецептов)",
-  "spwallet.midnightconfig.inventoryOffsetY_withRecipeBook": "Смещение плашки (от центра) по Y в инвентаре (с книгой рецептов)",
-  "spwallet.midnightconfig.chestOffsetX": "Смещение плашки (от центра) по Х в сундуке",
-  "spwallet.midnightconfig.chestOffsetY": "Смещение плашки (от центра) по Y в сундуке",
-  "spwallet.midnightconfig.doubleChestOffsetX": "Смещение плашки (от центра) по Х в двойном сундуке",
-  "spwallet.midnightconfig.doubleChestOffsetY": "Смещение плашки (от центра) по Y в двойном сундуке",
+  "spwallet.midnightconfig.isCountInStacks": "Показывать счётчик в стаках",
 
-  "spwallet.midnightconfig.simpleInvX_withRecipeBook": "Смещение плашки (от центра) по Х в инвентаре (с книгой рецептов) в простом режиме",
-  "spwallet.midnightconfig.simpleInvY_withRecipeBook": "Смещение плашки (от центра) по Y в инвентаре (с книгой рецептов) в простом режиме",
-  "spwallet.midnightconfig.simpleInvX": "Смещение плашки (от центра) по Х в инвентаре в простом режиме",
-  "spwallet.midnightconfig.simpleInvY": "Смещение плашки (от центра) по Y в инвентаре в простом режиме",
 
-  "spwallet.midnightconfig.simpleChestX_inv": "Смещение строки (от центра) с счётчиком инвентаря по X в сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleChestY_inv": "Смещение строки (от центра) с счётчиком инвентаря по Y в сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleChestX_chest": "Смещение строки (от центра) с счётчиком сундука по X в сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleChestY_chest": "Смещение строки (от центра) с счётчиком сундука по Y в сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleChestX_all": "Смещение строки (от центра) с счётчиком всего по X в сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleChestY_all": "Смещение строки (от центра) с счётчиком всего по Y в сундуке в простом режиме",
+  "spwallet.midnightconfig.selectorSettings": "§nНастройки выделения АР",
 
-  "spwallet.midnightconfig.simpleDoubleChestX_inv": "Смещение строки с счётчиком инвентаря по X в двойном сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleDoubleChestY_inv": "Смещение строки с счётчиком инвентаря по Y в двойном сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleDoubleChestX_chest": "Смещение строки с счётчиком сундука по X в двойном сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleDoubleChestY_chest": "Смещение строки с счётчиком сундука по Y в двойном сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleDoubleChestX_all": "Смещение строки с счётчиком всего по X в двойном сундуке в простом режиме",
-  "spwallet.midnightconfig.simpleDoubleChestY_all": "Смещение строки с счётчиком всего по Y в двойном сундуке в простом режиме"
+  "spwallet.midnightconfig.select_color": "Цвет выделения",
+  "spwallet.midnightconfig.select_alpha": "Прозрачность выделения",
+
+
+  "spwallet.midnightconfig.hotkeysSettings": "§nНастройки управления",
+
+  "spwallet.midnightconfig.selectKeybind_key": "Выделить предмет",
+  "spwallet.midnightconfig.showCountInStacks_key": "Показывать счётчик в стаках",
+
+  "spwallet.midnightconfig.enum.KeybindsEnum.VANILLA": "Как в настройках игры",
+  "spwallet.midnightconfig.enum.KeybindsEnum.W": "W",
+  "spwallet.midnightconfig.enum.KeybindsEnum.D": "D",
+  "spwallet.midnightconfig.enum.KeybindsEnum.G": "G",
+  "spwallet.midnightconfig.enum.KeybindsEnum.CTRL": "Левый CTRL",
+  "spwallet.midnightconfig.enum.KeybindsEnum.ALT": "Левый ALT",
+  "spwallet.midnightconfig.enum.KeybindsEnum.MMB": "Средняя кнопка мыши",
+
+
+  "spwallet.midnightconfig.hudSettings": "§nНастройки расположения плашки (от центра)",
+
+  "spwallet.midnightconfig.inventoryOffsetX": "Смещение счётчика по Х в ИНВЕНТАРЕ",
+  "spwallet.midnightconfig.inventoryOffsetY": "Смещение счётчика по Y в ИНВЕНТАРЕ",
+  "spwallet.midnightconfig.inventoryOffsetX_withRecipeBook": "Смещение счётчика по Х в ИНВЕНТАРЕ (с книгой рецептов)",
+  "spwallet.midnightconfig.inventoryOffsetY_withRecipeBook": "Смещение счётчика по Y в ИНВЕНТАРЕ (с книгой рецептов)",
+  "spwallet.midnightconfig.chestOffsetX": "Смещение счётчика по Х в СУНДУКЕ",
+  "spwallet.midnightconfig.chestOffsetY": "Смещение счётчика по Y в СУНДУКЕ",
+  "spwallet.midnightconfig.doubleChestOffsetX": "Смещение счётчика по Х в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.doubleChestOffsetY": "Смещение счётчика по Y в ДВОЙНОМ СУНДУКЕ",
+
+
+  "spwallet.midnightconfig.simpleModeSettings": "§nНастройки расположения плашки (от центра) в ПРОСТОМ РЕЖИМЕ",
+
+  "spwallet.midnightconfig.simpleInvX_withRecipeBook": "Смещение счётчика по Х в ИНВЕНТАРЕ (с книгой рецептов)",
+  "spwallet.midnightconfig.simpleInvY_withRecipeBook": "Смещение счётчика по Y в ИНВЕНТАРЕ (с книгой рецептов)",
+  "spwallet.midnightconfig.simpleInvX": "Смещение счётчика по Х в ИНВЕНТАРЕ",
+  "spwallet.midnightconfig.simpleInvY": "Смещение счётчика по Y в ИНВЕНТАРЕ",
+
+  "spwallet.midnightconfig.simpleChestX_inv": "Смещение счётчика ИНВЕНТАРЯ по X в СУНДУКЕ",
+  "spwallet.midnightconfig.simpleChestY_inv": "Смещение счётчика ИНВЕНТАРЯ по Y в СУНДУКЕ",
+  "spwallet.midnightconfig.simpleChestX_chest": "Смещение счётчика СУНДУКА по X в СУНДУКЕ",
+  "spwallet.midnightconfig.simpleChestY_chest": "Смещение счётчика СУНДУКА по Y в СУНДУКЕ",
+  "spwallet.midnightconfig.simpleChestX_all": "Смещение счётчика ВСЕГО по X в СУНДУКЕ",
+  "spwallet.midnightconfig.simpleChestY_all": "Смещение счётчика ВСЕГО по Y в СУНДУКЕ",
+
+  "spwallet.midnightconfig.simpleDoubleChestX_inv": "Смещение счётчика ИНВЕНТАРЯ по X в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.simpleDoubleChestY_inv": "Смещение счётчика ИНВЕНТАРЯ по Y в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.simpleDoubleChestX_chest": "Смещение счётчика СУНДУКА по X в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.simpleDoubleChestY_chest": "Смещение счётчика СУНДУКА по Y в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.simpleDoubleChestX_all": "Смещение счётчика ВСЕГО по X в ДВОЙНОМ СУНДУКЕ",
+  "spwallet.midnightconfig.simpleDoubleChestY_all": "Смещение счётчика ВСЕГО по Y в ДВОЙНОМ СУНДУКЕ"
 }

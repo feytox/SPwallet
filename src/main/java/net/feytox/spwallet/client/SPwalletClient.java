@@ -3,21 +3,50 @@ package net.feytox.spwallet.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.Window;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.collection.DefaultedList;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class SPwalletClient implements ClientModInitializer {
+
+    public static int lastKeyPressed;
+    public static int ticks = 0;
+    public static Screen lastScreen;
+
+    public static KeyBinding selectSlot_keybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("spwallet.midnightconfig.selectKeybind_key",
+            InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.category.spwallet"));
+
+    public static KeyBinding showCountInStacks_keybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("spwallet.midnightconfig.showCountInStacks_key",
+            InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.category.spwallet"));
+
     @Override
     public void onInitializeClient() {
         SPwalletConfig.init("spwallet", SPwalletConfig.class);
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            ticks += 1;
+            if (ticks >= 6) {
+                ticks = 0;
+                lastKeyPressed = 0;
+            }
+
+            if (lastScreen != client.currentScreen) {
+                SlotsSelector.cleanSelectedSlots();
+                lastScreen = client.currentScreen;
+            }
+        });
     }
 
     public static int getItemCount(Inventory inventory, Item item) {
@@ -55,5 +84,13 @@ public class SPwalletClient implements ClientModInitializer {
             coord = (window.getScaledHeight() / 2) - coord;
         }
         return coord;
+    }
+
+    public static int convertToInt(Object num) {
+        if (num instanceof Double) {
+            return (int) Math.round((Double) num);
+        } else {
+            return (int) num;
+        }
     }
 }

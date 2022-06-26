@@ -2,7 +2,9 @@ package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -43,7 +45,10 @@ public class ShulkerCountMixin {
                         int containerCount = SPwalletClient.getCountFromItemStacks(itemStacks);
                         int allCount = inventoryCount + containerCount;
 
-                        if (inventoryCount > 0 && containerCount > 0) {
+                        if (SlotsSelector.isSlotsSelected()) {
+                            drawHud(matrices, new ArrayList<>(List.of(SlotsSelector.getSlotsCount())), screenName);
+                        }
+                        else if (inventoryCount > 0 && containerCount > 0) {
                             drawHud(matrices, new ArrayList<>(Arrays.asList(inventoryCount, containerCount, allCount)), screenName);
                         } else if (containerCount == 0) {
                             drawHud(matrices, new ArrayList<>(List.of(inventoryCount)), "inv_" + screenName);
@@ -56,5 +61,6 @@ public class ShulkerCountMixin {
                 }
             }
         }
+        SlotsSelector.highlightSlots(matrices);
     }
 }

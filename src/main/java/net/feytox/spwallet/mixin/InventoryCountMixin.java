@@ -2,6 +2,7 @@ package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -24,6 +25,7 @@ public class InventoryCountMixin {
 
     public void onDrawBackground (MatrixStack matrices, float delta, int mouseX, int mouseY,  CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
+        SPwalletClient.lastScreen = client.currentScreen;
         if (SPwalletConfig.showCounter && client.currentScreen != null && client.player != null) {
             Text screenTitle = client.currentScreen.getTitle();
             if (screenTitle instanceof TranslatableText) {
@@ -32,13 +34,20 @@ public class InventoryCountMixin {
                 if ("container.crafting".equals(screenName) && allCount > 0) {
                     InventoryScreen inventoryScreen = (InventoryScreen) client.currentScreen;
                     boolean isRecipeBookOpen = inventoryScreen.getRecipeBookWidget().isOpen();
+
+                    if (SlotsSelector.isSlotsSelected()) {
+                        allCount = SlotsSelector.getSlotsCount();
+                    }
+
                     if (isRecipeBookOpen) {
                         drawHud(matrices, new ArrayList<>(List.of(allCount)), "inv_recipe");
                     } else {
                         drawHud(matrices, new ArrayList<>(List.of(allCount)));
+                        }
                     }
                 }
             }
+        SlotsSelector.highlightSlots(matrices);
         }
     }
-}
+

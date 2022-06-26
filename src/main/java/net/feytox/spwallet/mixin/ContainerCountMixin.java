@@ -2,8 +2,10 @@ package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
@@ -28,6 +30,7 @@ public class ContainerCountMixin {
 
     public void onDrawBackground (MatrixStack matrices, float delta, int mouseX, int mouseY,  CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
+        SPwalletClient.lastScreen = client.currentScreen;
 
         if (SPwalletConfig.showCounter && client.player != null) {
             ScreenHandler screenHandler = client.player.currentScreenHandler;
@@ -42,7 +45,10 @@ public class ContainerCountMixin {
                     if (screenTitle instanceof TranslatableText && allCount > 0) {
                         String screenName = ((TranslatableText) screenTitle).getKey();
 
-                        if (inventoryCount > 0 && containerCount > 0) {
+                        if (SlotsSelector.isSlotsSelected()) {
+                            drawHud(matrices, new ArrayList<>(List.of(SlotsSelector.getSlotsCount())), "inv_" + screenName);
+                        }
+                        else if (inventoryCount > 0 && containerCount > 0) {
                             drawHud(matrices, new ArrayList<>(Arrays.asList(inventoryCount, containerCount, allCount)), screenName);
                         } else if (containerCount == 0) {
                             drawHud(matrices, new ArrayList<>(List.of(inventoryCount)), "inv_" + screenName);
@@ -55,5 +61,6 @@ public class ContainerCountMixin {
                 }
             }
         }
+        SlotsSelector.highlightSlots(matrices);
     }
 }

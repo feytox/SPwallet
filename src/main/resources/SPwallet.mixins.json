@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ContainerCountMixin",
+    "HandledScreenAccessor",
     "InventoryCountMixin",
+    "KeyboardMixin",
+    "MouseMixin",
     "ShulkerCountMixin"
   ],
   "client": [
