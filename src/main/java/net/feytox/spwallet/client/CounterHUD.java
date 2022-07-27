@@ -46,7 +46,7 @@ public class CounterHUD {
                     onlineLine_y = getCoordFromCenter("y", SPwalletConfig.onlineOffsetY_withRecipeBook);
                 }
 
-                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                if (SPwalletConfig.showOnlineCounter
                         && (containerType.equals("inv") || containerType.equals("inv_recipe"))
                         && !SPwalletConfig.simpleMode) {
                         DrawableHelper.drawTexture(matrices, onlineLine_x, onlineLine_y, 48,
@@ -107,7 +107,7 @@ public class CounterHUD {
                 DrawableHelper.drawTexture(matrices, invLine_x, invLine_y,6, 6,
                         getIconXByType(containerType), getIconYBySlotsSelected(), 6, 6, 64, 64);
 
-                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                if (SPwalletConfig.showOnlineCounter
                         && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
                     DrawableHelper.drawTexture(matrices, onlineLine_x, onlineLine_y,6, 6,
                             48, 10, 6, 6, 64, 64);
@@ -125,7 +125,7 @@ public class CounterHUD {
                 int onlineCount = OnlineWallet.currentBalance != null ? OnlineWallet.currentBalance : -621;
                 String onlineCountLine = String.valueOf(onlineCount != -621 ? onlineCount : "?");
                 if ((!SPwalletConfig.isCountInStacks | onlineCount < 64) && SPwalletConfig.showOnlineCounter
-                        && !SPwalletConfig.showInInventoryCount && onlineCount <= 9999
+                        && onlineCount <= 9999
                         && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
                     // Иконки АР
                     DrawableHelper.drawTexture(matrices, onlineLine_x + 8 + getXByCount(onlineCount), onlineLine_y, 6, 6,
@@ -138,7 +138,7 @@ public class CounterHUD {
                 DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
 
-                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                if (SPwalletConfig.showOnlineCounter
                         && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
                     DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(onlineCountLine),
                             onlineLine_x + 8, onlineLine_y - 1, -1);
