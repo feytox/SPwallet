@@ -63,20 +63,20 @@ public class SPwalletConfig extends MidnightConfig {
     public static Comment hudSettings;
 
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetX = -24;
+    public static int inventoryOffsetX = -52;
     @Entry(min=-999999, max=999999)
     public static int inventoryOffsetY = -84;
     @Entry(min=-999999, max=999999)
-    public static int inventoryOffsetX_withRecipeBook = -24;
+    public static int inventoryOffsetX_withRecipeBook = -52;
     @Entry(min=-999999, max=999999)
     public static int inventoryOffsetY_withRecipeBook = -84;
 
     @Entry(min=-999999, max=999999)
-    public static int onlineOffsetX = -24;
+    public static int onlineOffsetX = 1;
     @Entry(min=-999999, max=999999)
     public static int onlineOffsetY = -84;
     @Entry(min=-999999, max=999999)
-    public static int onlineOffsetX_withRecipeBook = -24;
+    public static int onlineOffsetX_withRecipeBook = 1;
     @Entry(min=-999999, max=999999)
     public static int onlineOffsetY_withRecipeBook = -84;
 
@@ -103,13 +103,13 @@ public class SPwalletConfig extends MidnightConfig {
     public static int simpleInvY_withRecipeBook = 10;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleOnlineOffsetX = -24;
+    public static int simpleOnlineOffsetX = 40;
     @Entry(min=-999999, max=999999)
-    public static int simpleOnlineOffsetY = -84;
+    public static int simpleOnlineOffsetY = 20;
     @Entry(min=-999999, max=999999)
-    public static int simpleOnlineOffsetX_withRecipeBook = -24;
+    public static int simpleOnlineOffsetX_withRecipeBook = 116;
     @Entry(min=-999999, max=999999)
-    public static int simpleOnlineOffsetY_withRecipeBook = -84;
+    public static int simpleOnlineOffsetY_withRecipeBook = 20;
 
     @Entry(min=-999999, max=999999)
     public static int simpleChestX_inv = 40;
