@@ -1,11 +1,11 @@
 package net.feytox.spwallet.mixin;
 
+import net.feytox.spwallet.client.OnlineWallet;
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
@@ -26,7 +26,7 @@ import static net.feytox.spwallet.client.CounterHUD.drawHud;
 @Mixin(GenericContainerScreen.class)
 public class ContainerCountMixin {
 
-    @Inject(method = "drawBackground", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "drawBackground", at = @At("RETURN"))
 
     public void onDrawBackground (MatrixStack matrices, float delta, int mouseX, int mouseY,  CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -40,6 +40,18 @@ public class ContainerCountMixin {
                     Inventory inventory = ((GenericContainerScreenHandler) screenHandler).getInventory();
                     int inventoryCount = SPwalletClient.getItemCount();
                     int containerCount = SPwalletClient.getItemCount(inventory);
+
+                    if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                        if (SPwalletClient.ticks == -1) {
+                            SPwalletClient.ticks = 0;
+                            OnlineWallet.reloadBalance();
+                        }
+
+                        if (OnlineWallet.currentBalance != null) {
+                            inventoryCount += OnlineWallet.currentBalance;
+                        }
+                    }
+
                     int allCount = inventoryCount + containerCount;
 
                     if (screenTitle instanceof TranslatableText && allCount > 0) {

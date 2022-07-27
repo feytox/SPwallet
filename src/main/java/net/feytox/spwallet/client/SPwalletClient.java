@@ -22,29 +22,43 @@ import java.util.Objects;
 @Environment(EnvType.CLIENT)
 public class SPwalletClient implements ClientModInitializer {
 
-    public static int lastKeyPressed;
     public static int ticks = 0;
     public static Screen lastScreen;
 
     public static KeyBinding selectSlot_keybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("spwallet.midnightconfig.selectKeybind_key",
             InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.category.spwallet"));
+    public static KeyBinding selectSlot_shadowKey = new KeyBinding("", InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_UNKNOWN, "");
 
     public static KeyBinding showCountInStacks_keybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("spwallet.midnightconfig.showCountInStacks_key",
             InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.category.spwallet"));
+    public static KeyBinding showCountInStacks_shadowKey = new KeyBinding("", InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_UNKNOWN, "");
 
     @Override
     public void onInitializeClient() {
+        KeyBinding testKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.spwallet.testKey",
+                InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.category.spwallet"));
+
         SPwalletConfig.init("spwallet", SPwalletConfig.class);
+        OnlineWallet.initCommand();
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            ticks += 1;
-            if (ticks >= 6) {
-                ticks = 0;
-                lastKeyPressed = 0;
+            if (ticks > -1) {
+                ticks += 1;
+            }
+            if (ticks >= SPwalletConfig.reloadCooldown * 20) {
+                ticks = -1;
             }
 
             if (lastScreen != client.currentScreen) {
                 SlotsSelector.cleanSelectedSlots();
                 lastScreen = client.currentScreen;
+            }
+
+            while (testKey.wasPressed()) {
+                Integer balance = OnlineWallet.getBalance(SPwalletConfig.cardId, SPwalletConfig.cardToken);
+                System.out.println(balance);
             }
         });
     }

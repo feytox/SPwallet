@@ -1,10 +1,10 @@
 package net.feytox.spwallet.mixin;
 
+import net.feytox.spwallet.client.OnlineWallet;
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ import static net.feytox.spwallet.client.CounterHUD.drawHud;
 @Mixin(ShulkerBoxScreen.class)
 public class ShulkerCountMixin {
 
-    @Inject(method = "drawBackground", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "drawBackground", at = @At("RETURN"))
 
     public void onDrawBackground (MatrixStack matrices, float delta, int mouseX, int mouseY,  CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -43,6 +43,18 @@ public class ShulkerCountMixin {
                         DefaultedList<ItemStack> itemStacks = shulkerBoxScreenHandler.getStacks();
                         int inventoryCount = SPwalletClient.getItemCount();
                         int containerCount = SPwalletClient.getCountFromItemStacks(itemStacks);
+
+                        if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                            if (SPwalletClient.ticks == -1) {
+                                SPwalletClient.ticks = 0;
+                                OnlineWallet.reloadBalance();
+                            }
+
+                            if (OnlineWallet.currentBalance != null) {
+                                inventoryCount += OnlineWallet.currentBalance;
+                            }
+                        }
+
                         int allCount = inventoryCount + containerCount;
 
                         if (SlotsSelector.isSlotsSelected()) {

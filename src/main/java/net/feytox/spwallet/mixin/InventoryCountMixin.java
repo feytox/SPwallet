@@ -1,5 +1,6 @@
 package net.feytox.spwallet.mixin;
 
+import net.feytox.spwallet.client.OnlineWallet;
 import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
 import net.feytox.spwallet.client.SlotsSelector;
@@ -21,7 +22,7 @@ import static net.feytox.spwallet.client.CounterHUD.drawHud;
 @Mixin(InventoryScreen.class)
 public class InventoryCountMixin {
 
-    @Inject(method = "drawBackground", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "drawBackground", at = @At("RETURN"))
 
     public void onDrawBackground (MatrixStack matrices, float delta, int mouseX, int mouseY,  CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -31,7 +32,20 @@ public class InventoryCountMixin {
             if (screenTitle instanceof TranslatableText) {
                 String screenName = ((TranslatableText) screenTitle).getKey();
                 int allCount = SPwalletClient.getItemCount();
-                if ("container.crafting".equals(screenName) && allCount > 0) {
+
+                if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                    if (SPwalletClient.ticks == -1) {
+                        SPwalletClient.ticks = 0;
+                        OnlineWallet.reloadBalance();
+                    }
+
+                    if (OnlineWallet.currentBalance != null) {
+                        allCount += OnlineWallet.currentBalance;
+                    }
+                }
+
+                if ("container.crafting".equals(screenName) && (allCount > 0 || (SPwalletConfig.showOnlineCounter
+                        && !SPwalletConfig.showInInventoryCount))) {
                     InventoryScreen inventoryScreen = (InventoryScreen) client.currentScreen;
                     boolean isRecipeBookOpen = inventoryScreen.getRecipeBookWidget().isOpen();
 

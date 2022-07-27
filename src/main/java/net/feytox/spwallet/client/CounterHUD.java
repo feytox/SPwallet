@@ -15,6 +15,10 @@ import static net.feytox.spwallet.client.SPwalletClient.convertToInt;
 import static net.feytox.spwallet.client.SPwalletClient.getCoordFromCenter;
 
 public class CounterHUD {
+    // TODO full rewrite of drawHud and etc. (with modules or something better than this)
+    // TODO full rewrite of drawHud and etc. (with modules or something better than this)
+    // TODO full rewrite of drawHud and etc. (with modules or something better than this)
+
     public static void drawHud(MatrixStack matrices, List<Integer> count, String containerType) {
         int aX = getCoordByType("x", containerType);
         int aY = getCoordByType("y", containerType);
@@ -34,6 +38,29 @@ public class CounterHUD {
                 int invLine_x = getCoordFromCenter("x", aX + 5);
                 int invLine_y = getCoordFromCenter("y", aY - 6);
 
+                int onlineLine_x = getCoordFromCenter("x", SPwalletConfig.onlineOffsetX);
+                int onlineLine_y = getCoordFromCenter("y", SPwalletConfig.onlineOffsetY);
+
+                if (containerType.equals("inv_recipe")) {
+                    onlineLine_x = getCoordFromCenter("x", SPwalletConfig.onlineOffsetX_withRecipeBook);
+                    onlineLine_y = getCoordFromCenter("y", SPwalletConfig.onlineOffsetY_withRecipeBook);
+                }
+
+                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                        && (containerType.equals("inv") || containerType.equals("inv_recipe"))
+                        && !SPwalletConfig.simpleMode) {
+                        DrawableHelper.drawTexture(matrices, onlineLine_x, onlineLine_y, 48,
+                                18, 0, 36, 48, 18, 64, 64);
+                }
+
+                onlineLine_x = getCoordFromCenter("x", SPwalletConfig.onlineOffsetX + 5);
+                onlineLine_y = getCoordFromCenter("y", SPwalletConfig.onlineOffsetY - 6);
+
+                if (containerType.equals("inv_recipe")) {
+                    onlineLine_x = getCoordFromCenter("x", SPwalletConfig.onlineOffsetX_withRecipeBook + 5);
+                    onlineLine_y = getCoordFromCenter("y", SPwalletConfig.onlineOffsetY_withRecipeBook - 6);
+                }
+
                 if (!SPwalletConfig.simpleMode) {
                     DrawableHelper.drawTexture(matrices, getCoordFromCenter("x", aX),
                             getCoordFromCenter("y", aY), 48, 18,
@@ -41,9 +68,16 @@ public class CounterHUD {
                 } else {
                     invLine_x = getCoordFromCenter("x", SPwalletConfig.simpleInvX);
                     invLine_y = getCoordFromCenter("y", SPwalletConfig.simpleInvY);
+
+                    onlineLine_x = getCoordFromCenter("x", SPwalletConfig.simpleOnlineOffsetX);
+                    onlineLine_y = getCoordFromCenter("y", SPwalletConfig.simpleOnlineOffsetY);
+
                     if (Objects.equals(containerType, "inv_recipe")) {
                         invLine_x = getCoordFromCenter("x", SPwalletConfig.simpleInvX_withRecipeBook);
                         invLine_y = getCoordFromCenter("y", SPwalletConfig.simpleInvY_withRecipeBook);
+
+                        onlineLine_x = getCoordFromCenter("x", SPwalletConfig.simpleOnlineOffsetX_withRecipeBook);
+                        onlineLine_y = getCoordFromCenter("y", SPwalletConfig.simpleOnlineOffsetY_withRecipeBook);
                     }
                     if (containerType.length() > 3) {
                         switch (containerType) {
@@ -73,6 +107,12 @@ public class CounterHUD {
                 DrawableHelper.drawTexture(matrices, invLine_x, invLine_y,6, 6,
                         getIconXByType(containerType), getIconYBySlotsSelected(), 6, 6, 64, 64);
 
+                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                        && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
+                    DrawableHelper.drawTexture(matrices, onlineLine_x, onlineLine_y,6, 6,
+                            48, 10, 6, 6, 64, 64);
+                }
+
                 String countLine1 = String.valueOf(count.get(0));
                 if (!SPwalletConfig.isCountInStacks | count.get(0) < 64) {
                     // Иконки АР
@@ -82,9 +122,27 @@ public class CounterHUD {
                     countLine1 = getCountInStacks(count.get(0));
                 }
 
+                int onlineCount = OnlineWallet.currentBalance != null ? OnlineWallet.currentBalance : -621;
+                String onlineCountLine = String.valueOf(onlineCount != -621 ? onlineCount : "?");
+                if ((!SPwalletConfig.isCountInStacks | onlineCount < 64) && SPwalletConfig.showOnlineCounter
+                        && !SPwalletConfig.showInInventoryCount && onlineCount <= 9999
+                        && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
+                    // Иконки АР
+                    DrawableHelper.drawTexture(matrices, onlineLine_x + 8 + getXByCount(onlineCount), onlineLine_y, 6, 6,
+                            56, getTextureYByARcount(onlineCount), 6, 6, 64, 64);
+                } else if (onlineCount != -621) {
+                    onlineCountLine = getCountInStacks(onlineCount);
+                }
+
                 // Число АР
                 DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
+
+                if (SPwalletConfig.showOnlineCounter && !SPwalletConfig.showInInventoryCount
+                        && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
+                    DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(onlineCountLine),
+                            onlineLine_x + 8, onlineLine_y - 1, -1);
+                }
             }
             case 3 -> {
                 // это база
@@ -190,6 +248,10 @@ public class CounterHUD {
     }
 
     private static int getXByCount(Integer count) {
+        if (count == -621) {
+            return 7;
+        }
+
         String string_count = Integer.toString(count);
         return (string_count.length() * 6) + 1;
     }

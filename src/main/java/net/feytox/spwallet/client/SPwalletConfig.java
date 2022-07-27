@@ -15,6 +15,19 @@ public class SPwalletConfig extends MidnightConfig {
     public static boolean isCountInStacks = false;
 
     @Comment
+    public static Comment onlineBalance;
+    @Entry
+    public static boolean showOnlineCounter = true;
+    @Entry
+    public static boolean showInInventoryCount = false;
+    @Entry
+    public static int reloadCooldown = 15;
+    @Entry
+    public static String cardId = "";
+    @Entry
+    public static String cardToken = "";
+
+    @Comment
     public static Comment selectorSettings;
 
     @Entry(width = 7, min = 7, isColor = true)
@@ -59,6 +72,15 @@ public class SPwalletConfig extends MidnightConfig {
     public static int inventoryOffsetY_withRecipeBook = -84;
 
     @Entry(min=-999999, max=999999)
+    public static int onlineOffsetX = -24;
+    @Entry(min=-999999, max=999999)
+    public static int onlineOffsetY = -84;
+    @Entry(min=-999999, max=999999)
+    public static int onlineOffsetX_withRecipeBook = -24;
+    @Entry(min=-999999, max=999999)
+    public static int onlineOffsetY_withRecipeBook = -84;
+
+    @Entry(min=-999999, max=999999)
     public static int chestOffsetX = -24;
     @Entry(min=-999999, max=999999)
     public static int chestOffsetY = -84;
@@ -72,13 +94,22 @@ public class SPwalletConfig extends MidnightConfig {
     public static Comment simpleModeSettings;
 
     @Entry(min=-999999, max=999999)
-    public static int simpleInvX_withRecipeBook = 116;
-    @Entry(min=-999999, max=999999)
-    public static int simpleInvY_withRecipeBook = 10;
-    @Entry(min=-999999, max=999999)
     public static int simpleInvX = 40;
     @Entry(min=-999999, max=999999)
     public static int simpleInvY = 10;
+    @Entry(min=-999999, max=999999)
+    public static int simpleInvX_withRecipeBook = 116;
+    @Entry(min=-999999, max=999999)
+    public static int simpleInvY_withRecipeBook = 10;
+
+    @Entry(min=-999999, max=999999)
+    public static int simpleOnlineOffsetX = -24;
+    @Entry(min=-999999, max=999999)
+    public static int simpleOnlineOffsetY = -84;
+    @Entry(min=-999999, max=999999)
+    public static int simpleOnlineOffsetX_withRecipeBook = -24;
+    @Entry(min=-999999, max=999999)
+    public static int simpleOnlineOffsetY_withRecipeBook = -84;
 
     @Entry(min=-999999, max=999999)
     public static int simpleChestX_inv = 40;

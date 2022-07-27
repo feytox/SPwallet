@@ -19,24 +19,22 @@ import java.util.Objects;
 @Mixin(Keyboard.class)
 public class KeyboardMixin {
 
-    @Inject(method="onKey", at = @At("RETURN"), cancellable = true)
-    public void onOnKey (long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
+    @Inject(method = "onKey", at = @At("RETURN"))
+    public void onOnKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
         Screen screen = MinecraftClient.getInstance().currentScreen;
-        if ((screen instanceof InventoryScreen || screen instanceof GenericContainerScreen || screen instanceof ShulkerBoxScreen)
-                && SPwalletClient.lastKeyPressed != key) {
-              if ((Objects.equals(SPwalletConfig.selectKeybind_key, SPwalletConfig.KeybindsEnum.VANILLA)
-                      && SPwalletClient.selectSlot_keybind.matchesKey(key, scancode)) |
-                      SPwalletConfig.selectKeybind_key.getKeycode() == key) {
-                SlotsSelector.selectSlot();
-                SPwalletClient.ticks = 0;
-            } else if ((Objects.equals(SPwalletConfig.showCountInStacks_key, SPwalletConfig.KeybindsEnum.VANILLA)
-                      && SPwalletClient.showCountInStacks_keybind.matchesKey(key, scancode)) |
-                      SPwalletConfig.showCountInStacks_key.getKeycode() == key) {
-                SPwalletConfig.isCountInStacks = !SPwalletConfig.isCountInStacks;
-                SPwalletConfig.write("spwallet");
-                SPwalletClient.ticks = 0;
+        if (screen instanceof InventoryScreen || screen instanceof GenericContainerScreen || screen instanceof ShulkerBoxScreen) {
+            if (action == 1) {
+                if ((Objects.equals(SPwalletConfig.selectKeybind_key, SPwalletConfig.KeybindsEnum.VANILLA)
+                        && SPwalletClient.selectSlot_keybind.matchesKey(key, scancode)) |
+                        SPwalletConfig.selectKeybind_key.getKeycode() == key) {
+                    SlotsSelector.selectSlot();
+                } else if ((Objects.equals(SPwalletConfig.showCountInStacks_key, SPwalletConfig.KeybindsEnum.VANILLA)
+                        && SPwalletClient.showCountInStacks_keybind.matchesKey(key, scancode)) |
+                        SPwalletConfig.showCountInStacks_key.getKeycode() == key) {
+                    SPwalletConfig.isCountInStacks = !SPwalletConfig.isCountInStacks;
+                    SPwalletConfig.write("spwallet");
+                }
             }
         }
-        SPwalletClient.lastKeyPressed = key;
     }
 }
