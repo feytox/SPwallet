@@ -40,7 +40,7 @@ public class OnlineWallet {
                                     }
                                     return 1;
                                 })
-                                .then(argument("card id", StringArgumentType.greedyString())
+                                .then(argument("card id", StringArgumentType.string())
                                         .then(argument("card token", StringArgumentType.greedyString())
                                                 .executes(context -> {
                                                     String[] inputSplitted = context.getInput().split(" ");
