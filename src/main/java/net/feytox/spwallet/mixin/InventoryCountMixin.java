@@ -33,7 +33,12 @@ public class InventoryCountMixin {
                 String screenName = ((TranslatableText) screenTitle).getKey();
                 int allCount = SPwalletClient.getItemCount();
 
-                if (SPwalletConfig.showOnlineCounter) {
+                if (SPwalletConfig.showOnlineCounter && SPwalletClient.ticks == -1) {
+                    SPwalletClient.ticks = 0;
+                    OnlineWallet.reloadBalance();
+                }
+
+                if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
                     if (SPwalletClient.ticks == -1) {
                         SPwalletClient.ticks = 0;
                         OnlineWallet.reloadBalance();
