@@ -71,9 +71,12 @@ public class OnlineWallet {
 
     @Nullable
     public static Integer getBalance(String cardId, String cardToken) {
-        IWalletInfo walletInfo = getWalletInfo(cardId, cardToken).join();
-        if (walletInfo != null) {
-            return walletInfo.getBalance();
+        CompletableFuture<IWalletInfo> futureInfo = getWalletInfo(cardId, cardToken);
+        if (futureInfo != null) {
+            IWalletInfo walletInfo = futureInfo.join();
+            if (walletInfo != null) {
+                return walletInfo.getBalance();
+            }
         }
         return null;
     }
@@ -83,7 +86,15 @@ public class OnlineWallet {
         return getBalance(SPwalletConfig.cardId, SPwalletConfig.cardToken);
     }
 
+    @Nullable
     public static CompletableFuture<IWalletInfo> getWalletInfo(String cardId, String cardToken) {
+        try {
+            new WalletKey(cardId, cardToken);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return null;
+        }
+
         WalletKey key = new WalletKey(cardId, cardToken);
         IWallet wallet = new Wallet(key);
 
@@ -91,6 +102,7 @@ public class OnlineWallet {
             e.printStackTrace();
             return null;
         });
+
     }
 
     private static void sendFormattedText(String key, Object formatObj) {

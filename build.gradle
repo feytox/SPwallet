@@ -30,6 +30,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     implementation 'com.github.ValeraShimchuck:JSP:1.5'
+    include 'com.github.ValeraShimchuck:JSP:1.5'
 
     // Other
     modImplementation "maven.modrinth:midnightlib:0.4.4"
