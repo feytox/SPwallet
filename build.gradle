@@ -29,13 +29,15 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation 'com.github.ValeraShimchuck:JSP:1.5'
-    include 'com.github.ValeraShimchuck:JSP:1.5'
+    implementation "com.github.ValeraShimchuck:JSP:${project.JSP_version}"
+    include "com.github.ValeraShimchuck:JSP:${project.JSP_version}"
+    include "org.apache.httpcomponents.client5:httpclient5:${project.hc_version}"
+    include "org.apache.httpcomponents.core5:httpcore5:${project.hc_version}"
 
     // Other
-    modImplementation "maven.modrinth:midnightlib:0.4.4"
-    include "maven.modrinth:midnightlib:0.4.4"
-    modImplementation "com.terraformersmc:modmenu:3.2.2"
+    modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+    include "maven.modrinth:midnightlib:${project.midnightlib_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
