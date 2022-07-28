@@ -50,8 +50,10 @@ public class ShulkerCountMixin {
                                 OnlineWallet.reloadBalance();
                             }
 
-                            if (OnlineWallet.currentBalance != null) {
-                                inventoryCount += OnlineWallet.currentBalance;
+                            Integer currentBalance = OnlineWallet.getCurrentBalance();
+
+                            if (currentBalance != null) {
+                                inventoryCount += currentBalance;
                             }
                         }
 

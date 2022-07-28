@@ -37,9 +37,6 @@ public class SPwalletClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        KeyBinding testKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.spwallet.testKey",
-                InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.category.spwallet"));
-
         SPwalletConfig.init("spwallet", SPwalletConfig.class);
         OnlineWallet.initCommand();
 
@@ -54,11 +51,6 @@ public class SPwalletClient implements ClientModInitializer {
             if (lastScreen != client.currentScreen) {
                 SlotsSelector.cleanSelectedSlots();
                 lastScreen = client.currentScreen;
-            }
-
-            while (testKey.wasPressed()) {
-                Integer balance = OnlineWallet.getBalance(SPwalletConfig.cardId, SPwalletConfig.cardToken);
-                System.out.println(balance);
             }
         });
     }

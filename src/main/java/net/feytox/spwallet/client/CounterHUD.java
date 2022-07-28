@@ -122,7 +122,8 @@ public class CounterHUD {
                     countLine1 = getCountInStacks(count.get(0));
                 }
 
-                int onlineCount = OnlineWallet.currentBalance != null ? OnlineWallet.currentBalance : -621;
+                Integer currentBalance = OnlineWallet.getCurrentBalance();
+                int onlineCount = currentBalance != null ? currentBalance : -621;
                 String onlineCountLine = String.valueOf(onlineCount != -621 ? onlineCount : "?");
                 if ((!SPwalletConfig.isCountInStacks | onlineCount < 64) && SPwalletConfig.showOnlineCounter
                         && onlineCount <= 9999

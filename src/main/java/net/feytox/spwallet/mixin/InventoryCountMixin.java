@@ -44,8 +44,10 @@ public class InventoryCountMixin {
                         OnlineWallet.reloadBalance();
                     }
 
-                    if (OnlineWallet.currentBalance != null) {
-                        allCount += OnlineWallet.currentBalance;
+                    Integer currentBalance = OnlineWallet.getCurrentBalance();
+
+                    if (currentBalance != null) {
+                        allCount += currentBalance;
                     }
                 }
 
