@@ -41,6 +41,16 @@ public class SPwalletClient implements ClientModInitializer {
                 InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.category.spwallet"));
 
         SPwalletConfig.init("spwallet", SPwalletConfig.class);
+
+        if ((SPwalletConfig.inventoryOffsetX - SPwalletConfig.onlineOffsetX) == -26
+            && SPwalletConfig.inventoryOffsetX == -25 && SPwalletConfig.inventoryOffsetX_withRecipeBook == -25) {
+
+            SPwalletConfig.inventoryOffsetX = -52;
+            SPwalletConfig.inventoryOffsetX_withRecipeBook = -52;
+
+            SPwalletConfig.write("spwallet");
+        }
+
         OnlineWallet.initCommand();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
