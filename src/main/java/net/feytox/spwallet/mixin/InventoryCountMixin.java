@@ -38,7 +38,7 @@ public class InventoryCountMixin {
                     OnlineWallet.reloadBalance();
                 }
 
-                if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                if (SPwalletConfig.showInInventoryCount) {
                     if (SPwalletClient.ticks == -1) {
                         SPwalletClient.ticks = 0;
                         OnlineWallet.reloadBalance();
