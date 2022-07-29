@@ -39,8 +39,8 @@ public class SPwalletClient implements ClientModInitializer {
     public void onInitializeClient() {
         SPwalletConfig.init("spwallet", SPwalletConfig.class);
 
-        if ((SPwalletConfig.inventoryOffsetX - SPwalletConfig.onlineOffsetX) == -26
-            && SPwalletConfig.inventoryOffsetX == -25 && SPwalletConfig.inventoryOffsetX_withRecipeBook == -25) {
+        if ((SPwalletConfig.inventoryOffsetX - SPwalletConfig.onlineOffsetX) == -25
+            && SPwalletConfig.inventoryOffsetX == -24 && SPwalletConfig.inventoryOffsetX_withRecipeBook == -24) {
 
             SPwalletConfig.inventoryOffsetX = -52;
             SPwalletConfig.inventoryOffsetX_withRecipeBook = -52;
