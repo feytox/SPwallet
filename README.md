@@ -18,6 +18,14 @@ Mod made specifically for #SP servers. It will add a Diamond Ore counter (curren
 
 </details>
 
+<details>
+<summary>После обновления плашки наехали друг на друга?</summary>
+
+Если по какой-то причине мод не обновился должным образом, просто ресетните в конфиге данные пункты
+![image](https://user-images.githubusercontent.com/73577753/181618013-e353b3df-c81b-408f-9e95-4c682e8d046b.png)
+
+</details>
+
 ## Создатели
 
 ![This is an image](https://visage.surgeplay.com/bust/128/09196327-ac27-43f4-8f47-87859b8423be)
