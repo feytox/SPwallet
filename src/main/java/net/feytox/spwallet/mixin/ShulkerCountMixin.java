@@ -1,8 +1,8 @@
 package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.OnlineWallet;
-import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
@@ -44,7 +44,7 @@ public class ShulkerCountMixin {
                         int inventoryCount = SPwalletClient.getItemCount();
                         int containerCount = SPwalletClient.getCountFromItemStacks(itemStacks);
 
-                        if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                        if (SPwalletConfig.showInInventoryCount) {
                             if (SPwalletClient.ticks == -1) {
                                 SPwalletClient.ticks = 0;
                                 OnlineWallet.reloadBalance();
