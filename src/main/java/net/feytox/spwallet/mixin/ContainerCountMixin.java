@@ -1,8 +1,8 @@
 package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.OnlineWallet;
-import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
@@ -10,8 +10,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TextContent;
+import net.minecraft.text.TranslatableTextContent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,12 +36,12 @@ public class ContainerCountMixin {
             ScreenHandler screenHandler = client.player.currentScreenHandler;
             if (screenHandler instanceof GenericContainerScreenHandler) {
                 if (client.currentScreen != null) {
-                    Text screenTitle = client.currentScreen.getTitle();
+                    TextContent screenTitle = client.currentScreen.getTitle().getContent();
                     Inventory inventory = ((GenericContainerScreenHandler) screenHandler).getInventory();
                     int inventoryCount = SPwalletClient.getItemCount();
                     int containerCount = SPwalletClient.getItemCount(inventory);
 
-                    if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                    if (SPwalletConfig.showInInventoryCount) {
                         if (SPwalletClient.ticks == -1) {
                             SPwalletClient.ticks = 0;
                             OnlineWallet.reloadBalance();
@@ -56,8 +56,8 @@ public class ContainerCountMixin {
 
                     int allCount = inventoryCount + containerCount;
 
-                    if (screenTitle instanceof TranslatableText && allCount > 0) {
-                        String screenName = ((TranslatableText) screenTitle).getKey();
+                    if (screenTitle instanceof TranslatableTextContent && allCount > 0) {
+                        String screenName = ((TranslatableTextContent) screenTitle).getKey();
 
                         if (SlotsSelector.isSlotsSelected()) {
                             drawHud(matrices, new ArrayList<>(List.of(SlotsSelector.getSlotsCount())), "inv_" + screenName);

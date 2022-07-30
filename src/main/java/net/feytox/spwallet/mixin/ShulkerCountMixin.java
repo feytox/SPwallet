@@ -1,8 +1,8 @@
 package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.OnlineWallet;
-import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
@@ -10,8 +10,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TextContent;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,15 +36,15 @@ public class ShulkerCountMixin {
             ScreenHandler screenHandler = client.player.currentScreenHandler;
             if (screenHandler instanceof ShulkerBoxScreenHandler) {
                 if (client.currentScreen != null) {
-                    Text screenTitle = client.currentScreen.getTitle();
-                    if (screenTitle instanceof TranslatableText) {
-                        String screenName = ((TranslatableText) screenTitle).getKey();
+                    TextContent screenTitle = client.currentScreen.getTitle().getContent();
+                    if (screenTitle instanceof TranslatableTextContent) {
+                        String screenName = ((TranslatableTextContent) screenTitle).getKey();
                         ShulkerBoxScreenHandler shulkerBoxScreenHandler = ((ShulkerBoxScreenHandler) screenHandler);
                         DefaultedList<ItemStack> itemStacks = shulkerBoxScreenHandler.getStacks();
                         int inventoryCount = SPwalletClient.getItemCount();
                         int containerCount = SPwalletClient.getCountFromItemStacks(itemStacks);
 
-                        if (SPwalletConfig.showInInventoryCount && SPwalletConfig.showOnlineCounter) {
+                        if (SPwalletConfig.showInInventoryCount) {
                             if (SPwalletClient.ticks == -1) {
                                 SPwalletClient.ticks = 0;
                                 OnlineWallet.reloadBalance();

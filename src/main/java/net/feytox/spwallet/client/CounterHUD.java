@@ -5,7 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -136,12 +136,12 @@ public class CounterHUD {
                 }
 
                 // Число АР
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, Text.literal(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
 
                 if (SPwalletConfig.showOnlineCounter
                         && (containerType.equals("inv") || containerType.equals("inv_recipe"))) {
-                    DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(onlineCountLine),
+                    DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, Text.literal(onlineCountLine),
                             onlineLine_x + 8, onlineLine_y - 1, -1);
                 }
             }
@@ -207,11 +207,11 @@ public class CounterHUD {
                 }
 
                 // Число АР
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine1),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, Text.literal(countLine1),
                         invLine_x + 8, invLine_y - 1, -1);
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine2),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, Text.literal(countLine2),
                         chestLine_x + 8, chestLine_y - 1, -1);
-                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, new LiteralText(countLine3),
+                DrawableHelper.drawTextWithShadow(matrices, client.textRenderer, Text.literal(countLine3),
                         allLine_x + 8, allLine_y - 1, -1);
             }
         }

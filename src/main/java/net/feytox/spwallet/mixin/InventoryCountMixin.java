@@ -1,14 +1,14 @@
 package net.feytox.spwallet.mixin;
 
 import net.feytox.spwallet.client.OnlineWallet;
-import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SPwalletClient;
+import net.feytox.spwallet.client.SPwalletConfig;
 import net.feytox.spwallet.client.SlotsSelector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TextContent;
+import net.minecraft.text.TranslatableTextContent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,9 +28,9 @@ public class InventoryCountMixin {
         MinecraftClient client = MinecraftClient.getInstance();
         SPwalletClient.lastScreen = client.currentScreen;
         if (SPwalletConfig.showCounter && client.currentScreen != null && client.player != null) {
-            Text screenTitle = client.currentScreen.getTitle();
-            if (screenTitle instanceof TranslatableText) {
-                String screenName = ((TranslatableText) screenTitle).getKey();
+            TextContent screenTitle = client.currentScreen.getTitle().getContent();
+            if (screenTitle instanceof TranslatableTextContent) {
+                String screenName = ((TranslatableTextContent) screenTitle).getKey();
                 int allCount = SPwalletClient.getItemCount();
 
                 if (SPwalletConfig.showOnlineCounter && SPwalletClient.ticks == -1) {

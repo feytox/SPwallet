@@ -1,29 +1,27 @@
 package net.feytox.spwallet.client;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
-import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import ua.valeriishymchuk.jsp.interfaces.wallet.IWallet;
 import ua.valeriishymchuk.jsp.interfaces.wallet.IWalletInfo;
 import ua.valeriishymchuk.jsp.wallet.Wallet;
 import ua.valeriishymchuk.jsp.wallet.WalletKey;
 
 import javax.annotation.Nullable;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
 
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.argument;
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class OnlineWallet {
     private static CompletableFuture<IWalletInfo> currentBalance = null;
     private static Integer lastBalance = null;
 
     public static void initCommand() {
-        ClientCommandManager.DISPATCHER.register(literal("spwallet")
+        ClientCommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess) -> dispatcher.register(literal("spwallet")
                 .then(literal("balance")
                         .then(literal("get")
                                 .executes(context -> {
@@ -48,7 +46,7 @@ public class OnlineWallet {
                                                         sendTranslatableText("spwallet.get.fail");
                                                     }
                                                     return 1;
-                                                }))))));
+                                                }))))))));
     }
 
     public static void reloadBalance() {
@@ -106,11 +104,11 @@ public class OnlineWallet {
     }
 
     private static void sendFormattedText(String key, Object formatObj) {
-        sendMessage(new LiteralText(I18n.translate(key, formatObj)));
+        sendMessage(Text.literal(I18n.translate(key, formatObj)));
     }
 
     private static void sendTranslatableText(String key) {
-        sendMessage(new TranslatableText(key));
+        sendMessage(Text.translatable(key));
     }
 
     private static void sendMessage(Text message) {
