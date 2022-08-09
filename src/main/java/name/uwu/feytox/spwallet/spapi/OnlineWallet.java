@@ -1,23 +1,31 @@
-package net.feytox.spwallet.client;
+package name.uwu.feytox.spwallet.spapi;
 
+import blue.endless.jankson.annotation.Nullable;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import name.uwu.feytox.spwallet.config.ModConfig;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
-import ua.valeriishymchuk.jsp.interfaces.wallet.IWallet;
-import ua.valeriishymchuk.jsp.interfaces.wallet.IWalletInfo;
-import ua.valeriishymchuk.jsp.wallet.Wallet;
-import ua.valeriishymchuk.jsp.wallet.WalletKey;
 
-import javax.annotation.Nullable;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class OnlineWallet {
-    private static CompletableFuture<IWalletInfo> currentBalance = null;
+
+    private static CompletableFuture<Integer> currentBalance = null;
     private static Integer lastBalance = null;
 
     public static void initCommand() {
@@ -25,7 +33,8 @@ public class OnlineWallet {
                 .then(literal("balance")
                         .then(literal("get")
                                 .executes(context -> {
-                                    Integer balance = getBalance();
+                                    ModConfig config = ModConfig.get();
+                                    Integer balance = getBalance(config.cardId, config.cardToken);
                                     if (balance != null) {
                                         sendFormattedText("spwallet.get.success", balance);
                                     } else {
@@ -50,57 +59,65 @@ public class OnlineWallet {
     }
 
     public static void reloadBalance() {
-        currentBalance = getWalletInfo(SPwalletConfig.cardId, SPwalletConfig.cardToken);
+        currentBalance = CompletableFuture.supplyAsync(() -> getBalance(ModConfig.get().cardId, ModConfig.get().cardToken));
+    }
+
+    public static int getCurrentBalance2() {
+        Integer balance = getCurrentBalance();
+        return balance != null ? balance : -621;
     }
 
     @Nullable
-    public static Integer getCurrentBalance() {
+    private static Integer getCurrentBalance() {
+        Integer balance = null;
+
         if (currentBalance != null && currentBalance.isDone()) {
-            IWalletInfo walletInfo = currentBalance.join();
-            if (walletInfo != null) {
-                lastBalance = walletInfo.getBalance();
+            try {
+                balance = currentBalance.get();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (balance != null) {
+                lastBalance = balance;
             }
         }
-        if (lastBalance != null) {
-            return lastBalance;
-        }
-        return null;
+
+        return lastBalance;
     }
 
     @Nullable
-    public static Integer getBalance(String cardId, String cardToken) {
-        CompletableFuture<IWalletInfo> futureInfo = getWalletInfo(cardId, cardToken);
-        if (futureInfo != null) {
-            IWalletInfo walletInfo = futureInfo.join();
-            if (walletInfo != null) {
-                return walletInfo.getBalance();
-            }
-        }
-        return null;
-    }
-
-    @Nullable
-    public static Integer getBalance() {
-        return getBalance(SPwalletConfig.cardId, SPwalletConfig.cardToken);
-    }
-
-    @Nullable
-    public static CompletableFuture<IWalletInfo> getWalletInfo(String cardId, String cardToken) {
+    private static Integer getBalance(String cardId, String cardToken) {
         try {
-            new WalletKey(cardId, cardToken);
-        } catch (RuntimeException e) {
+            String response = getCardData(cardId, cardToken);
+            JsonElement root = JsonParser.parseString(response);
+            return root.getAsJsonObject().get("balance").getAsInt();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
 
-        WalletKey key = new WalletKey(cardId, cardToken);
-        IWallet wallet = new Wallet(key);
+    private static String getCardData(String cardId, String cardToken) {
+        String notEncoded = cardId + ":" + cardToken;
+        String headerValue = Base64.getEncoder().encodeToString(notEncoded.getBytes());
 
-        return wallet.getWalletInfo().exceptionally(e -> {
-            e.printStackTrace();
-            return null;
-        });
+        return request("https://spworlds.ru/api/public/card", "Authorization", "Bearer " + headerValue);
+    }
 
+    private static String request(String url, String headerName, String headerValue) {
+        List<String> responseList = new ArrayList<>();
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .setHeader(headerName, headerValue)
+                .build();
+        httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(responseList::add)
+                .join();
+
+        return String.join("", responseList);
     }
 
     private static void sendFormattedText(String key, Object formatObj) {

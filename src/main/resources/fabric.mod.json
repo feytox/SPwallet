@@ -6,6 +6,7 @@
   "description": "A mod for counting your diamond ores.",
   "authors": [
     "Feytox",
+    "xisaloe",
     "DearFox"
   ],
   "contact": {
@@ -13,22 +14,28 @@
     "sources": "https://github.com/feytox/SPwallet",
     "issues": "https://github.com/feytox/SPwallet/issues"
   },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/U23C6ewP2X"
+      }
+    }
+  },
   "license": "MIT",
   "icon": "assets/spwallet/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.feytox.spwallet.client.SPwalletClient"
+      "name.uwu.feytox.spwallet.SPwalletClient"
     ],
-    "main": [
-      "net.feytox.spwallet.SPwallet"
+    "modmenu": [
+      "name.uwu.feytox.spwallet.config.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "SPwallet.mixins.json"
+    "spwallet.mixins.json"
   ],
   "depends": {
-    "fabricloader": "*",
     "fabric": "*",
     "minecraft": "1.19.x"
   }

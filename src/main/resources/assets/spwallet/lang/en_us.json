@@ -1,85 +1,31 @@
 {
-  "spwallet.get.success": "Баланс карты: %s",
-  "spwallet.get.fail": "Произошла ошибка! Проверьте правильность айди и токена, доступность сайта СП, повторите попытку позже или сообщите о баге в issue",
+  "spwallet.st": "st.",
+  "spwallet.b": "b.",
+  "spwallet.config.enableMod": "Enable Mod",
+  "spwallet.config.simpleMode": "Simple Mode",
+  "spwallet.tooltip.simpleMode": "If enabled, it will show the counters separately with no boxes.\n\nBy default, it is built into the interface.\nHowever, if something runs into each other or looks ugly,\nyou can adjust the position of the counters with the Editor Mode.",
+  "spwallet.config.isCountInStacks": "Count in Stacks",
+  "spwallet.config.enableShulkerCount": "Count currency in shulkers",
+  "spwallet.config.selectKeybind_key": "Highlight Item",
+  "spwallet.config.showCountInStacks_key": "Toggle \"Count in Stacks\"",
+  "spwallet.config.select_color": "Highlight Color",
+  "spwallet.config.select_alpha": "Highlight Opacity",
+  "spwallet.config.editorMode": "Counters Edit Mode",
+  "spwallet.tooltip.editorMode": "Toggles the capability to move counters.\n\nTo do this, you need to hit the counter icon with LMB and move\nthe counter with the arrows to the right place,\nthen press Enter to save or Esc to reset.",
+  "spwallet.config.coordsReset": "Restore Default Positions",
 
-  "spwallet.midnightconfig.title": "SPwallet Config",
+  "spwallet.config.showOnlineCounter": "Enable card Diamond Ores counter",
+  "spwallet.config.showInInventoryCount": "Add card Diamond Ores to inventory counter",
+  "spwallet.config.reloadCooldown": "Counter update frequency",
+  "spwallet.config.cardId": "API Card ID",
+  "spwallet.tooltip.cardId": "A guide on how to get an API card token and card ID can be found on the mod page.",
+  "spwallet.config.cardToken": "API Card Token",
 
-  "key.category.spwallet": "#SP wallet (Требуется настройка конфига)",
+  "spwallet.config.generalCategory": "General",
+  "spwallet.config.keysCategory": "Keybinds",
+  "spwallet.config.selectCategory": "Selection",
+  "spwallet.config.cardCategory": "Card",
 
-  "spwallet.midnightconfig.mainSettings": "§nБазовые настройки",
-
-  "spwallet.midnightconfig.showCounter": "Показывать счётчик",
-  "spwallet.midnightconfig.simpleMode": "Простой режим (без плашки)",
-  "spwallet.midnightconfig.isCountInStacks": "Показывать счётчик в стаках",
-
-  "spwallet.midnightconfig.onlineBalance": "§l§nНастройки онлайн счётчика",
-  "spwallet.midnightconfig.showOnlineCounter": "Включить счётчик АР на карте",
-  "spwallet.midnightconfig.showInInventoryCount": "Прибавлять АРы к счётчику инвентаря",
-  "spwallet.midnightconfig.reloadCooldown": "Частота обновления счётчика",
-  "spwallet.midnightconfig.cardId": "API айди карты",
-  "spwallet.midnightconfig.cardToken": "API токен карты",
-
-  "spwallet.midnightconfig.selectorSettings": "§l§nНастройки выделения АР",
-
-  "spwallet.midnightconfig.select_color": "Цвет выделения",
-  "spwallet.midnightconfig.select_alpha": "Прозрачность выделения",
-
-
-  "spwallet.midnightconfig.hotkeysSettings": "§l§nНастройки управления",
-
-  "spwallet.midnightconfig.selectKeybind_key": "Выделить предмет",
-  "spwallet.midnightconfig.showCountInStacks_key": "Показывать счётчик в стаках",
-
-  "spwallet.midnightconfig.enum.KeybindsEnum.VANILLA": "Как в настройках игры",
-  "spwallet.midnightconfig.enum.KeybindsEnum.W": "W",
-  "spwallet.midnightconfig.enum.KeybindsEnum.D": "D",
-  "spwallet.midnightconfig.enum.KeybindsEnum.G": "G",
-  "spwallet.midnightconfig.enum.KeybindsEnum.CTRL": "Левый CTRL",
-  "spwallet.midnightconfig.enum.KeybindsEnum.ALT": "Левый ALT",
-  "spwallet.midnightconfig.enum.KeybindsEnum.MMB": "Средняя кнопка мыши",
-
-
-  "spwallet.midnightconfig.hudSettings": "§l§nНастройки расположения плашки (от центра)",
-
-  "spwallet.midnightconfig.inventoryOffsetX": "Смещение счётчика по Х в ИНВЕНТАРЕ",
-  "spwallet.midnightconfig.inventoryOffsetY": "Смещение счётчика по Y в ИНВЕНТАРЕ",
-  "spwallet.midnightconfig.inventoryOffsetX_withRecipeBook": "Смещение счётчика по Х в ИНВЕНТАРЕ (с книгой рецептов)",
-  "spwallet.midnightconfig.inventoryOffsetY_withRecipeBook": "Смещение счётчика по Y в ИНВЕНТАРЕ (с книгой рецептов)",
-
-  "spwallet.midnightconfig.onlineOffsetX": "Смещение счётчика карты по Х",
-  "spwallet.midnightconfig.onlineOffsetY": "Смещение счётчика карты по Y",
-  "spwallet.midnightconfig.onlineOffsetX_withRecipeBook": "Смещение счётчика карты по Х (с книгой рецептов)",
-  "spwallet.midnightconfig.onlineOffsetY_withRecipeBook": "Смещение счётчика карты по Y (с книгой рецептов)",
-
-  "spwallet.midnightconfig.chestOffsetX": "Смещение счётчика по Х в СУНДУКЕ",
-  "spwallet.midnightconfig.chestOffsetY": "Смещение счётчика по Y в СУНДУКЕ",
-  "spwallet.midnightconfig.doubleChestOffsetX": "Смещение счётчика по Х в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.doubleChestOffsetY": "Смещение счётчика по Y в ДВОЙНОМ СУНДУКЕ",
-
-
-  "spwallet.midnightconfig.simpleModeSettings": "§l§nНастройки расположения плашки (от центра) в ПРОСТОМ РЕЖИМЕ",
-
-  "spwallet.midnightconfig.simpleInvX_withRecipeBook": "Смещение счётчика по Х в ИНВЕНТАРЕ (с книгой рецептов)",
-  "spwallet.midnightconfig.simpleInvY_withRecipeBook": "Смещение счётчика по Y в ИНВЕНТАРЕ (с книгой рецептов)",
-  "spwallet.midnightconfig.simpleInvX": "Смещение счётчика по Х в ИНВЕНТАРЕ",
-  "spwallet.midnightconfig.simpleInvY": "Смещение счётчика по Y в ИНВЕНТАРЕ",
-
-  "spwallet.midnightconfig.simpleOnlineOffsetX": "Смещение счётчика карты по Х",
-  "spwallet.midnightconfig.simpleOnlineOffsetY": "Смещение счётчика карты по Y",
-  "spwallet.midnightconfig.simpleOnlineOffsetX_withRecipeBook": "Смещение счётчика карты по Х (с книгой рецептов)",
-  "spwallet.midnightconfig.simpleOnlineOffsetY_withRecipeBook": "Смещение счётчика карты по Y (с книгой рецептов)",
-
-  "spwallet.midnightconfig.simpleChestX_inv": "Смещение счётчика ИНВЕНТАРЯ по X в СУНДУКЕ",
-  "spwallet.midnightconfig.simpleChestY_inv": "Смещение счётчика ИНВЕНТАРЯ по Y в СУНДУКЕ",
-  "spwallet.midnightconfig.simpleChestX_chest": "Смещение счётчика СУНДУКА по X в СУНДУКЕ",
-  "spwallet.midnightconfig.simpleChestY_chest": "Смещение счётчика СУНДУКА по Y в СУНДУКЕ",
-  "spwallet.midnightconfig.simpleChestX_all": "Смещение счётчика ВСЕГО по X в СУНДУКЕ",
-  "spwallet.midnightconfig.simpleChestY_all": "Смещение счётчика ВСЕГО по Y в СУНДУКЕ",
-
-  "spwallet.midnightconfig.simpleDoubleChestX_inv": "Смещение счётчика ИНВЕНТАРЯ по X в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.simpleDoubleChestY_inv": "Смещение счётчика ИНВЕНТАРЯ по Y в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.simpleDoubleChestX_chest": "Смещение счётчика СУНДУКА по X в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.simpleDoubleChestY_chest": "Смещение счётчика СУНДУКА по Y в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.simpleDoubleChestX_all": "Смещение счётчика ВСЕГО по X в ДВОЙНОМ СУНДУКЕ",
-  "spwallet.midnightconfig.simpleDoubleChestY_all": "Смещение счётчика ВСЕГО по Y в ДВОЙНОМ СУНДУКЕ"
+  "spwallet.get.success": "Card balance: %s",
+  "spwallet.get.fail": "An error has occurred! Check the correctness of the ID and token and the availability of the SPworlds website, try again later or report a bug in Issues."
 }
