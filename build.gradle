@@ -27,6 +27,7 @@ dependencies {
     }
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     implementation "io.github.juuxel:libninepatch:${project.ninepatch_version}"
+    include implementation("blue.endless:jankson:${project.jankson_version}")
 }
 
 processResources {

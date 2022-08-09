@@ -33,7 +33,7 @@
     ]
   },
   "mixins": [
-    "spwallet.mixins.json"
+    "SPwallet.mixins.json"
   ],
   "depends": {
     "fabric": "*",
