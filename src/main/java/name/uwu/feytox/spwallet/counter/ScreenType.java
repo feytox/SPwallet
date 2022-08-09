@@ -1,7 +1,7 @@
 package name.uwu.feytox.spwallet.counter;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.text.TextContent;
 import net.minecraft.text.TranslatableTextContent;
 
 public enum ScreenType {
@@ -11,7 +11,7 @@ public enum ScreenType {
     DOUBLE_CHEST;
 
     public static ScreenType getScreenType(Screen screen) {
-        Text screenTitle = screen.getTitle();
+        TextContent screenTitle = screen.getTitle().getContent();
 
         if (screenTitle instanceof TranslatableTextContent) {
             String screenName = ((TranslatableTextContent) screenTitle).getKey();

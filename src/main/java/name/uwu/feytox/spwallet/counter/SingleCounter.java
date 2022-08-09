@@ -12,7 +12,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.Text;
+import net.minecraft.text.TextContent;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -74,7 +74,7 @@ public class SingleCounter {
     }
 
     public static SingleCounter getChestCounter(Screen screen) {
-        Text screenTitle = screen.getTitle();
+        TextContent screenTitle = screen.getTitle().getContent();
 
         if (screenTitle instanceof TranslatableTextContent) {
             String screenName = ((TranslatableTextContent) screenTitle).getKey();
