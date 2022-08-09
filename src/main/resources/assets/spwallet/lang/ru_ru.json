@@ -1,0 +1,32 @@
+{
+  "spwallet.st": "ст.",
+  "spwallet.b": "б.",
+
+  "spwallet.config.enableMod": "Включить мод",
+  "spwallet.config.simpleMode": "Простой режим",
+  "spwallet.tooltip.simpleMode": "Если включено, будет показывать счётчики раздельно без плашки.\n\nПо умолчанию встроено в интерфейс, однако,\nесли что-либо наезжает друг на друга\nили выглядит некрасиво, то вы можете настроить положение\nсчётчиков предпоследней функцией в конфиге.",
+  "spwallet.config.isCountInStacks": "Считать в стаках",
+  "spwallet.config.enableShulkerCount": "Учитывать валюту в шалкерах",
+  "spwallet.config.selectKeybind_key": "Выделить предмет",
+  "spwallet.config.showCountInStacks_key": "Переключить \"Считать в стаках\"",
+  "spwallet.config.select_color": "Цвет выделения",
+  "spwallet.config.select_alpha": "Непрозрачность выделения",
+  "spwallet.config.editorMode": "Режим редактирования положения счётчиков",
+  "spwallet.tooltip.editorMode": "Включает возможность перемещать счётчики.\n\nДля этого необходимо нажать ЛКМ на иконку счётчика и,\nпереместив счётчик стрелками в нужное место, нажать Enter,\nчтобы сохранить, или Esc, чтобы сбросить.",
+  "spwallet.config.coordsReset": "Сбросить положения счётчиков",
+
+  "spwallet.config.showOnlineCounter": "Включить счётчик АР на карте",
+  "spwallet.config.showInInventoryCount": "Прибавлять АРы к счётчику инвентаря",
+  "spwallet.config.reloadCooldown": "Частота обновления счётчика",
+  "spwallet.config.cardId": "API айди карты",
+  "spwallet.tooltip.cardId": "Гайд о том, как получить API токен и айди карты,\nвы можете найти на странице мода.",
+  "spwallet.config.cardToken": "API токен карты",
+
+  "spwallet.config.generalCategory": "Основное",
+  "spwallet.config.keysCategory": "Клавиши",
+  "spwallet.config.selectCategory": "Выделение",
+  "spwallet.config.cardCategory": "Карта",
+
+  "spwallet.get.success": "Баланс карты: %s",
+  "spwallet.get.fail": "Произошла ошибка! Проверьте правильность айди и токена, доступность сайта СП, повторите попытку позже или сообщите о баге в issue"
+}
