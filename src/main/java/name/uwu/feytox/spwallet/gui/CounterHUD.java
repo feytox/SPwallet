@@ -31,7 +31,8 @@ public class CounterHUD {
             return this;
         }
 
-        if (counter.count > 0 || counter.count == -621) {
+        if (counter.count > 0 || counter.count == -621 || ((this.screenType.equals(ScreenType.INVENTORY)
+                || this.screenType.equals(ScreenType.INVENTORY_WITH_RECIPE)) && ModConfig.get().showOnlineCounter)) {
             this.counterList.add(new GuiCounter(counter));
         }
 
@@ -43,7 +44,7 @@ public class CounterHUD {
             CounterCoord counterCoords = new CounterCoord(this);
             if (counterCoords.anchor_x != null) {
                 // non-simple panel render
-                int panel_width = 28;
+                int panel_width = 48;
                 int panel_height = 18;
 
                 if (counterCoords.line3_x != null) {
@@ -51,8 +52,8 @@ public class CounterHUD {
                 }
 
                 int lineLength = getLineLength();
-                if (lineLength > 11) {
-                    panel_width += lineLength - 11;
+                if (lineLength > 31) {
+                    panel_width += lineLength - 31;
                 }
 
                 CounterPanel panel = new CounterPanel(panel_width, panel_height);
