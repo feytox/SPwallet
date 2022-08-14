@@ -90,8 +90,13 @@ public class CounterEditor {
                     }
                 };
                 case INVENTORY_WITH_RECIPE -> this.saveConsumer = coord_change -> {
-                    config.inventoryOffsetX_withRecipeBook += coord_change.x;
-                    config.inventoryOffsetY_withRecipeBook += coord_change.y;
+                    if (!line_info.containerType.equals(ContainerType.CARD)) {
+                        config.inventoryOffsetX_withRecipeBook += coord_change.x;
+                        config.inventoryOffsetY_withRecipeBook += coord_change.y;
+                    } else {
+                        config.onlineOffsetX_withRecipeBook += coord_change.x;
+                        config.onlineOffsetY_withRecipeBook += coord_change.y;
+                    }
                 };
                 case CHEST -> this.saveConsumer = coord_change -> {
                     config.chestOffsetX += coord_change.x;
