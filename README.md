@@ -20,28 +20,25 @@ Mod made specifically for #SP servers. It will add a Diamond Ore counter (curren
 </details>
 
 <details>
-<summary>Не работает получение баланса карты?</summary>
+<summary>Баланс карты стал красного цвета?</summary>
 
-1. Попробуйте `/spwallet balance get`. Если ошибки не выдало - внимательно перенастройте конфиг или сбросьте его.
-2. Проверьте доступность API: https://spworlds.ru/api/public/card. Если появляется окно CloudFlare или возникает ошибка 500/502, то подождите, пока сайт починят.
-3. Перепроверьте API токен и айди карты, вписанные в конфиг.
-4. Если ничего из вышеперечисленного не помогло, пишите issue на GitHub мода.
+Это означает то, что при получении баланса карты от SPworlds API. Чтобы выяснить причину, используйте пункты ниже:
 
-</details>
-
-<details>
-<summary>После обновления плашки наехали друг на друга?</summary>
-
-Если по какой-то причине мод не обновился должным образом, просто ресетните в конфиге данные пункты
-![image](https://user-images.githubusercontent.com/73577753/181618013-e353b3df-c81b-408f-9e95-4c682e8d046b.png)
+1. Попробуйте `/spwallet balance get`. Если ошибка связана с "ддос защитой" - просто подождите (возможно, долго).
+2. Перепроверьте API токен и айди карты, вписанные в конфиг.
+3. Если ничего из вышеперечисленного не помогло, то посмотрите полную ошибку через консоль/логи и напишите issue на GitHub мода или обратитесь в наш [Discord](https://discord.gg/U23C6ewP2X).
 
 </details>
 
 ## Создатели
 
 ![This is an image](https://visage.surgeplay.com/bust/128/09196327-ac27-43f4-8f47-87859b8423be)
-#### [Feytox](https://github.com/feytox) - Программист, соавтор. Всё закодил и пофиксил кучу багов.
+#### [Feytox](https://github.com/feytox) - Программист, соавтор.
 ![This is an image](https://visage.surgeplay.com/bust/128/cdb909c2-499f-409c-8723-27c5b6effc20)
-#### [DearFox](https://github.com/DearFox) - Автор идеи и дизайнер. Старался сделать, чтобы было красиво, и находил кучу багов.
+#### [DearFox](https://github.com/DearFox) - Автор идеи и дизайнер.
+
+## Discord
+
+https://discord.gg/U23C6ewP2X
 
 ##### Специально для [#СП](https://spworlds.ru/)
