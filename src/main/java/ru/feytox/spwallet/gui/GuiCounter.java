@@ -50,7 +50,7 @@ public class GuiCounter {
     public void drawCount(MatrixStack matrices, int x, int y) {
         Text countText = Text.literal(count);
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        if (containerType.equals(ContainerType.CARD) && OnlineWallet.isBadResponse && !count.equals("?")) {
+        if (containerType.equals(ContainerType.CARD) && OnlineWallet.isBadResponse) {
             countText = Text.literal(count).formatted(Formatting.RED);
             textRenderer.draw(matrices, countText, x, y, -1);
         } else {
