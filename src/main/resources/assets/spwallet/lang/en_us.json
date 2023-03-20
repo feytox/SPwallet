@@ -27,5 +27,6 @@
   "spwallet.config.cardCategory": "Card",
 
   "spwallet.get.success": "Card balance: %s",
+  "spwallet.get.bad_api": "An error has occurred! SPworlds API is in 'DDoS protection', so it's impossible to get card balance. Please wait until the bug on SPworlds side is fixed",
   "spwallet.get.fail": "An error has occurred! Check the correctness of the ID and token and the availability of the SPworlds website, try again later or report a bug in Issues."
 }

@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
 import juuxel.libninepatch.NinePatch;
 import juuxel.libninepatch.TextureRegion;
@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
 
-import static name.uwu.feytox.spwallet.SPwalletClient.MOD_ID;
+import static ru.feytox.spwallet.SPwalletClient.MOD_ID;
 
 public class CounterPanel {
     public Identifier image;

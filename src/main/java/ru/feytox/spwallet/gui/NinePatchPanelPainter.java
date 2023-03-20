@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
 import juuxel.libninepatch.NinePatch;
 import net.minecraft.client.util.math.MatrixStack;

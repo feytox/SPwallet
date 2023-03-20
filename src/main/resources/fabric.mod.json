@@ -26,10 +26,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "name.uwu.feytox.spwallet.SPwalletClient"
+      "ru.feytox.spwallet.SPwalletClient"
     ],
     "modmenu": [
-      "name.uwu.feytox.spwallet.config.ModMenuIntegration"
+      "ru.feytox.spwallet.config.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -37,6 +37,6 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": "1.19.x"
+    "minecraft": "1.19.2"
   }
 }

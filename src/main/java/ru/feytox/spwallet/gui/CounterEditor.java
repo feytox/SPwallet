@@ -1,17 +1,17 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
-import name.uwu.feytox.spwallet.SPwalletClient;
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.counter.ContainerType;
-import name.uwu.feytox.spwallet.counter.ScreenType;
 import net.minecraft.sound.SoundEvents;
+import ru.feytox.spwallet.SPwalletClient;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.counter.ContainerType;
+import ru.feytox.spwallet.counter.ScreenType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static name.uwu.feytox.spwallet.gui.CounterHUD.getXFromCenter;
-import static name.uwu.feytox.spwallet.gui.CounterHUD.getYFromCenter;
+import static ru.feytox.spwallet.gui.CounterHUD.getXFromCenter;
+import static ru.feytox.spwallet.gui.CounterHUD.getYFromCenter;
 
 public class CounterEditor {
     static CounterEditor activeEditor = null;

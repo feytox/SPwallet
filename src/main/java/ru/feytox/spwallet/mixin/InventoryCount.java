@@ -1,12 +1,5 @@
-package name.uwu.feytox.spwallet.mixin;
+package ru.feytox.spwallet.mixin;
 
-import name.uwu.feytox.spwallet.SPwalletClient;
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.counter.ScreenType;
-import name.uwu.feytox.spwallet.counter.SingleCounter;
-import name.uwu.feytox.spwallet.counter.SlotsSelector;
-import name.uwu.feytox.spwallet.gui.CounterHUD;
-import name.uwu.feytox.spwallet.spapi.OnlineWallet;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -14,6 +7,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import ru.feytox.spwallet.SPwalletClient;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.counter.ScreenType;
+import ru.feytox.spwallet.counter.SingleCounter;
+import ru.feytox.spwallet.counter.SlotsSelector;
+import ru.feytox.spwallet.gui.CounterHUD;
+import ru.feytox.spwallet.spapi.OnlineWallet;
 
 @Mixin(InventoryScreen.class)
 public class InventoryCount {

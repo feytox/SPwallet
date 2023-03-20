@@ -1,13 +1,16 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.counter.ContainerType;
-import name.uwu.feytox.spwallet.counter.SingleCounter;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.counter.ContainerType;
+import ru.feytox.spwallet.counter.SingleCounter;
+import ru.feytox.spwallet.spapi.OnlineWallet;
 
 public class GuiCounter {
     ContainerType containerType;
@@ -45,8 +48,14 @@ public class GuiCounter {
     }
 
     public void drawCount(MatrixStack matrices, int x, int y) {
-        DrawableHelper.drawTextWithShadow(matrices, MinecraftClient.getInstance().textRenderer, Text.literal(this.count),
-                x, y, -1);
+        Text countText = Text.literal(count);
+        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+        if (containerType.equals(ContainerType.CARD) && OnlineWallet.isBadResponse && !count.equals("?")) {
+            countText = Text.literal(count).formatted(Formatting.RED);
+            textRenderer.draw(matrices, countText, x, y, -1);
+        } else {
+            DrawableHelper.drawTextWithShadow(matrices, textRenderer, countText, x, y, -1);
+        }
     }
 
     private static String getCountInStacks(int count) {

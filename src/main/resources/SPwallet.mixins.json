@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "name.uwu.feytox.spwallet.mixin",
+  "package": "ru.feytox.spwallet.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "HandledScreenAccessor"

@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.counter;
+package ru.feytox.spwallet.counter;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TextContent;

@@ -1,6 +1,6 @@
-package name.uwu.feytox.spwallet.counter;
+package ru.feytox.spwallet.counter;
 
-import name.uwu.feytox.spwallet.gui.GuiTexture;
+import ru.feytox.spwallet.gui.GuiTexture;
 
 public enum ContainerType {
     INVENTORY(new GuiTexture(0, 0, 5, 5)),

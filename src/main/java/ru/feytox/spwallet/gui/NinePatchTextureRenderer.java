@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import juuxel.libninepatch.ContextualTextureRenderer;

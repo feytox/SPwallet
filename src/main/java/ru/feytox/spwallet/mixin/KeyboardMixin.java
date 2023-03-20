@@ -1,8 +1,5 @@
-package name.uwu.feytox.spwallet.mixin;
+package ru.feytox.spwallet.mixin;
 
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.counter.SlotsSelector;
-import name.uwu.feytox.spwallet.gui.CounterEditor;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -14,6 +11,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.counter.SlotsSelector;
+import ru.feytox.spwallet.gui.CounterEditor;
 
 @Mixin(Keyboard.class)
 public class KeyboardMixin {

@@ -1,16 +1,16 @@
-package name.uwu.feytox.spwallet.gui;
+package ru.feytox.spwallet.gui;
 
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.counter.ContainerType;
-import name.uwu.feytox.spwallet.counter.ScreenType;
-import name.uwu.feytox.spwallet.counter.SingleCounter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.counter.ContainerType;
+import ru.feytox.spwallet.counter.ScreenType;
+import ru.feytox.spwallet.counter.SingleCounter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static name.uwu.feytox.spwallet.gui.GuiCounter.getCountPxLength;
+import static ru.feytox.spwallet.gui.GuiCounter.getCountPxLength;
 
 public class CounterHUD {
     List<GuiCounter> counterList;

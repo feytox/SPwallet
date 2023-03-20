@@ -1,8 +1,5 @@
-package name.uwu.feytox.spwallet.counter;
+package ru.feytox.spwallet.counter;
 
-import name.uwu.feytox.spwallet.SPwalletClient;
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.mixin.HandledScreenAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
@@ -17,6 +14,9 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.registry.Registry;
+import ru.feytox.spwallet.SPwalletClient;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.mixin.HandledScreenAccessor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static name.uwu.feytox.spwallet.counter.SingleCounter.getShulkerCount;
-import static name.uwu.feytox.spwallet.counter.SingleCounter.getWalletItem;
+import static ru.feytox.spwallet.counter.SingleCounter.getShulkerCount;
+import static ru.feytox.spwallet.counter.SingleCounter.getWalletItem;
 
 public class SlotsSelector {
     private static Map<Integer, Slot> selectedSlots = new HashMap<>();

@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.mixin;
+package ru.feytox.spwallet.mixin;
 
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.screen.slot.Slot;

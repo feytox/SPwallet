@@ -1,7 +1,5 @@
-package name.uwu.feytox.spwallet.counter;
+package ru.feytox.spwallet.counter;
 
-import name.uwu.feytox.spwallet.config.ModConfig;
-import name.uwu.feytox.spwallet.spapi.OnlineWallet;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.inventory.Inventory;
@@ -16,6 +14,8 @@ import net.minecraft.text.TextContent;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
+import ru.feytox.spwallet.config.ModConfig;
+import ru.feytox.spwallet.spapi.OnlineWallet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,8 @@ public class SingleCounter {
 
         int count = getCount();
         if (ModConfig.get().showInInventoryCount) {
-            count += OnlineWallet.getCurrentBalance2() != -621 ? OnlineWallet.getCurrentBalance2() : 0;
+            int balance = OnlineWallet.getCurrentBalance2();
+            count += balance != -621 ? balance : 0;
         }
 
         return new SingleCounter(ContainerType.INVENTORY, count);

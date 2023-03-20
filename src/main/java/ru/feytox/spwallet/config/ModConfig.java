@@ -1,4 +1,4 @@
-package name.uwu.feytox.spwallet.config;
+package ru.feytox.spwallet.config;
 
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonElement;
@@ -17,8 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-import static name.uwu.feytox.spwallet.SPwalletClient.LOGGER;
-import static name.uwu.feytox.spwallet.SPwalletClient.MOD_ID;
+import static ru.feytox.spwallet.SPwalletClient.LOGGER;
+import static ru.feytox.spwallet.SPwalletClient.MOD_ID;
 
 @Config(name = MOD_ID)
 public class ModConfig implements ConfigData {
@@ -36,6 +36,9 @@ public class ModConfig implements ConfigData {
     }
 
     public String config_version = "v1";
+
+    // p.s. -621 = empty state
+    public int cachedBalance = -621;
 
     // main settings
     public boolean enableMod = true;

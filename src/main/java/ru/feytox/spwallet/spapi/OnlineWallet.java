@@ -1,14 +1,15 @@
-package name.uwu.feytox.spwallet.spapi;
+package ru.feytox.spwallet.spapi;
 
 import blue.endless.jankson.annotation.Nullable;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import name.uwu.feytox.spwallet.config.ModConfig;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
+import ru.feytox.spwallet.SPwalletClient;
+import ru.feytox.spwallet.config.ModConfig;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -24,36 +25,43 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class OnlineWallet {
-
     private static CompletableFuture<Integer> currentBalance = null;
-    private static Integer lastBalance = null;
+    public static boolean isBadResponse = false;
+    public static boolean isBadAPI = false;
 
     public static void initCommand() {
         ClientCommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess) -> dispatcher.register(literal("spwallet")
                 .then(literal("balance")
                         .then(literal("get")
                                 .executes(context -> {
-                                    ModConfig config = ModConfig.get();
-                                    Integer balance = getBalance(config.cardId, config.cardToken);
-                                    if (balance != null) {
-                                        sendFormattedText("spwallet.get.success", balance);
-                                    } else {
-                                        sendTranslatableText("spwallet.get.fail");
-                                    }
+                                    CompletableFuture.runAsync(() -> {
+                                        ModConfig config = ModConfig.get();
+                                        Integer balance = getBalance(config.cardId, config.cardToken);
+                                        if (balance != null) {
+                                            sendFormattedText("spwallet.get.success", balance);
+                                        } else {
+                                            if (isBadAPI) sendTranslatableText("spwallet.get.bad_api");
+                                            else sendTranslatableText("spwallet.get.fail");
+                                        }
+                                    });
                                     return 1;
                                 })
                                 .then(argument("card id", StringArgumentType.string())
                                         .then(argument("card token", StringArgumentType.greedyString())
                                                 .executes(context -> {
-                                                    String[] inputSplitted = context.getInput().split(" ");
-                                                    String cardId = inputSplitted[inputSplitted.length-2];
-                                                    String cardToken = inputSplitted[inputSplitted.length-1];
-                                                    Integer balance = getBalance(cardId, cardToken);
-                                                    if (balance != null) {
-                                                        sendFormattedText("spwallet.get.success", balance);
-                                                    } else {
-                                                        sendTranslatableText("spwallet.get.fail");
-                                                    }
+                                                    CompletableFuture.runAsync(() -> {
+                                                        String[] inputSplitted = context.getInput().split(" ");
+                                                        String cardId = inputSplitted[inputSplitted.length-2];
+                                                        String cardToken = inputSplitted[inputSplitted.length-1];
+                                                        Integer balance = getBalance(cardId, cardToken);
+                                                        if (balance != null) {
+                                                            sendFormattedText("spwallet.get.success", balance);
+                                                        } else {
+                                                            if (isBadAPI) sendTranslatableText("spwallet.get.bad_api");
+                                                            else sendTranslatableText("spwallet.get.fail");
+                                                        }
+                                                    });
+
                                                     return 1;
                                                 }))))))));
     }
@@ -70,30 +78,42 @@ public class OnlineWallet {
     @Nullable
     private static Integer getCurrentBalance() {
         Integer balance = null;
+        ModConfig config = ModConfig.get();
 
         if (currentBalance != null && currentBalance.isDone()) {
             try {
                 balance = currentBalance.get();
-            } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
+            } catch (ExecutionException | InterruptedException ignored) {
             }
 
             if (balance != null) {
-                lastBalance = balance;
+                config.cachedBalance = balance;
+                ModConfig.save();
             }
         }
 
-        return lastBalance;
+        return config.cachedBalance;
     }
 
     @Nullable
     private static Integer getBalance(String cardId, String cardToken) {
+        String response = getCardData(cardId, cardToken);
         try {
-            String response = getCardData(cardId, cardToken);
             JsonElement root = JsonParser.parseString(response);
-            return root.getAsJsonObject().get("balance").getAsInt();
+            Integer result = root.getAsJsonObject().get("balance").getAsInt();
+            isBadResponse = false;
+            isBadAPI = false;
+            return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            SPwalletClient.LOGGER.error("Ошибка чтения ответа от SPworlds API.");
+            if (response.contains("<html><head><meta name=\"robots\" content=\"noindex, noarchive\" /><style>.gorizontal-vertikal")) {
+                SPwalletClient.LOGGER.error("Проблема со стороны SPworlds API - срабатывает 'защита от ддос'. Подождите, пока защита сама собой деактивируется");
+                isBadAPI = true;
+            } else {
+                SPwalletClient.LOGGER.error(response);
+                isBadAPI = false;
+            }
+            isBadResponse = true;
             return null;
         }
     }
