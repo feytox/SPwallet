@@ -40,7 +40,7 @@ public class GuiTexture {
     }
 
     public void drawTexture(MatrixStack matrices, int x, int y) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderTexture(0, this.image);
         DrawableHelper.drawTexture(matrices, x, y, this.u1, this.v1, this.width, this.height, this.texture_width, this.texture_height);
     }

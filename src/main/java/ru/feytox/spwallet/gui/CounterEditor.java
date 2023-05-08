@@ -44,7 +44,7 @@ public class CounterEditor {
             if (editor.x1 <= click_x && click_x <= editor.x2) {
                 if (editor.y1 <= click_y && click_y <= editor.y2) {
                     activeEditor = editor;
-                    SPwalletClient.playSound(SoundEvents.UI_BUTTON_CLICK);
+                    SPwalletClient.playSound(SoundEvents.UI_BUTTON_CLICK.value());
                     return;
                 }
             }

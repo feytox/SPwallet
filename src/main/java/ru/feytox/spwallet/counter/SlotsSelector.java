@@ -11,9 +11,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.registry.Registry;
 import ru.feytox.spwallet.SPwalletClient;
 import ru.feytox.spwallet.config.ModConfig;
 import ru.feytox.spwallet.mixin.HandledScreenAccessor;
@@ -28,7 +28,7 @@ import static ru.feytox.spwallet.counter.SingleCounter.getShulkerCount;
 import static ru.feytox.spwallet.counter.SingleCounter.getWalletItem;
 
 public class SlotsSelector {
-    private static Map<Integer, Slot> selectedSlots = new HashMap<>();
+    private static final Map<Integer, Slot> selectedSlots = new HashMap<>();
 
     public static void selectSlot() {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -56,6 +56,7 @@ public class SlotsSelector {
     public static void highlightSlots(MatrixStack matrices) {
         Window window = MinecraftClient.getInstance().getWindow();
         HandledScreen<?> handledScreen = (HandledScreen<?>) MinecraftClient.getInstance().currentScreen;
+        if (handledScreen == null) return;
 
         int x = (window.getScaledWidth() - ((HandledScreenAccessor) handledScreen).getBackgroundWidth()) / 2;
         if (handledScreen instanceof InventoryScreen && ((InventoryScreen) handledScreen).getRecipeBookWidget().isOpen()) {
@@ -83,7 +84,7 @@ public class SlotsSelector {
                 for (Integer slot_id: selectedSlots.keySet()) {
                     Slot slot = selectedSlots.get(slot_id);
                     ItemStack selectedItem = slot.getStack();
-                    if (Registry.ITEM.getId(selectedItem.getItem()).toString().contains("shulker_box")) {
+                    if (Registries.ITEM.getId(selectedItem.getItem()).toString().contains("shulker_box")) {
                         result.add(selectedItem);
                     }
                 }

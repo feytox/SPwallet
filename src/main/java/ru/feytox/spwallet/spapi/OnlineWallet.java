@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import ru.feytox.spwallet.SPwalletClient;
@@ -122,15 +123,15 @@ public class OnlineWallet {
         String notEncoded = cardId + ":" + cardToken;
         String headerValue = Base64.getEncoder().encodeToString(notEncoded.getBytes());
 
-        return request("https://spworlds.ru/api/public/card", "Authorization", "Bearer " + headerValue);
+        return request("Bearer " + headerValue);
     }
 
-    private static String request(String url, String headerName, String headerValue) {
+    private static String request(String headerValue) {
         List<String> responseList = new ArrayList<>();
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .setHeader(headerName, headerValue)
+                .uri(URI.create("https://spworlds.ru/api/public/card"))
+                .setHeader("Authorization", headerValue)
                 .build();
         httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
@@ -149,6 +150,8 @@ public class OnlineWallet {
     }
 
     private static void sendMessage(Text message) {
-        MinecraftClient.getInstance().player.sendMessage(message, false);
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        if (player == null) return;
+        player.sendMessage(message, false);
     }
 }

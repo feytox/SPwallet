@@ -9,11 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.text.TextContent;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import ru.feytox.spwallet.config.ModConfig;
 import ru.feytox.spwallet.spapi.OnlineWallet;
 
@@ -146,7 +146,7 @@ public class SingleCounter {
 
                 for(int j = 0; j < inventory.size(); ++j) {
                     ItemStack itemStack = inventory.getStack(j);
-                    if (Registry.ITEM.getId(itemStack.getItem()).toString().contains("shulker_box")) {
+                    if (Registries.ITEM.getId(itemStack.getItem()).toString().contains("shulker_box")) {
                         itemStacks.add(itemStack);
                     }
                 }
@@ -166,7 +166,7 @@ public class SingleCounter {
             count += getShulkerCount(() -> {
                 List<ItemStack> result = new ArrayList<>();
                 itemStacks.forEach(itemStack -> {
-                    if (Registry.ITEM.getId(itemStack.getItem()).toString().contains("shulker_box")) {
+                    if (Registries.ITEM.getId(itemStack.getItem()).toString().contains("shulker_box")) {
                         result.add(itemStack);
                     }
                 });
@@ -191,8 +191,8 @@ public class SingleCounter {
     public static int getShulkerCount(Supplier<List<ItemStack>> shulkersGetter) {
         int count = 0;
 
-        String walletItem_id = Registry.ITEM.getId(getWalletItem()).toString();
-        String extraItem_id = Registry.ITEM.getId(Items.DEEPSLATE_DIAMOND_ORE).toString();
+        String walletItem_id = Registries.ITEM.getId(getWalletItem()).toString();
+        String extraItem_id = Registries.ITEM.getId(Items.DEEPSLATE_DIAMOND_ORE).toString();
         List<ItemStack> shulkers = shulkersGetter.get();
 
         List<SimpleStack> allShulkerItems = new ArrayList<>();
