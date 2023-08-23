@@ -37,6 +37,6 @@ public class GuiTexture {
     }
 
     public void drawTexture(DrawContext context, int x, int y) {
-        context.drawTexture(this.image, x, y, this.u1, this.v1, this.width, this.height, this.texture_width, this.texture_height);
+        context.drawTexture(image, x, y, u1, v1, width, height, texture_width, texture_height);
     }
 }

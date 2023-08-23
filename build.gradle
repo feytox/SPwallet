@@ -30,8 +30,6 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     include implementation("io.github.juuxel:libninepatch:${project.ninepatch_version}")
     include implementation("blue.endless:jankson:${project.jankson_version}")
-
-    modImplementation "com.github.feytox:OptiDevium:${project.minecraft_version}-SNAPSHOT"
 }
 
 processResources {

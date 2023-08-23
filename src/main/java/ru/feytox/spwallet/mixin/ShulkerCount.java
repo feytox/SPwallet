@@ -3,7 +3,6 @@ package ru.feytox.spwallet.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
@@ -42,6 +41,7 @@ public class ShulkerCount {
                     .add(SingleCounter.allCount(inventoryCounter, shulkerCounter));
             hud.draw(context);
         }
+
         SlotsSelector.highlightSlots(context);
     }
 }

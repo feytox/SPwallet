@@ -67,8 +67,7 @@ public class SlotsSelector {
             int x1 = x + slot.x;
             int y1 = y + slot.y;
             Color selectColor = new Color(ModConfig.get().select_color);
-            context.fill(x1, y1, x1+16, y1+16, ColorHelper.Argb.getArgb(ModConfig.get().select_alpha,
-                    selectColor.getRed(), selectColor.getGreen(), selectColor.getBlue()));
+            context.fill(x1, y1, x1+16, y1+16, ColorHelper.Argb.getArgb(ModConfig.get().select_alpha, selectColor.getRed(), selectColor.getGreen(), selectColor.getBlue()));
         }
     }
 

@@ -2,7 +2,6 @@ package ru.feytox.spwallet.gui;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import ru.feytox.spwallet.config.ModConfig;
 import ru.feytox.spwallet.counter.ContainerType;
 import ru.feytox.spwallet.counter.ScreenType;
@@ -59,15 +58,12 @@ public class CounterHUD {
 
                 CounterPanel panel = new CounterPanel(panel_width, panel_height);
                 CounterPanel.createNinePatch(panel)
-                        .paint(context.getMatrices(),
-                                getXFromCenter(counterCoords.anchor_x),
-                                getYFromCenter(counterCoords.anchor_y));
+                        .paint(context, getXFromCenter(counterCoords.anchor_x), getYFromCenter(counterCoords.anchor_y));
             }
             if (counterCoords.line1_info != null) {
                 // simple, one line (not inventory)
                 CounterEditor.availableEditors.clear();
-                drawCounterLine(context, counterCoords.line1_info, counterCoords.line1_x, counterCoords.line1_y,
-                        this.screenType);
+                drawCounterLine(context, counterCoords.line1_info, counterCoords.line1_x, counterCoords.line1_y, this.screenType);
             } else {
                 // all other
                 if (!counterList.get(0).containerType.equals(ContainerType.CARD)) {

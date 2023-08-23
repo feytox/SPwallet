@@ -49,12 +49,13 @@ public class GuiCounter {
     public void drawCount(DrawContext context, int x, int y) {
         Text countText = Text.literal(count);
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        if (containerType.equals(ContainerType.CARD) && OnlineWallet.isBadResponse) {
-            countText = Text.literal(count).formatted(Formatting.RED);
+        if (!containerType.equals(ContainerType.CARD) || !OnlineWallet.isBadResponse) {
             context.drawTextWithShadow(textRenderer, countText, x, y, -1);
-        } else {
-            context.drawTextWithShadow(textRenderer, countText, x, y, -1);
+            return;
         }
+
+        countText = Text.literal(count).formatted(Formatting.RED);
+        context.drawText(textRenderer, countText, x, y, -1, false);
     }
 
     private static String getCountInStacks(int count) {

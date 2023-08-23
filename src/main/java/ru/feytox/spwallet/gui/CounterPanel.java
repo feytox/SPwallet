@@ -10,25 +10,23 @@ import java.util.function.Consumer;
 import static ru.feytox.spwallet.SPwalletClient.MOD_ID;
 
 public class CounterPanel {
-    public Identifier image;
     public int width;
     public int height;
 
     public CounterPanel(int width, int height) {
         this.width = width;
         this.height = height;
+    }
 
+    private static Identifier getPanelId() {
         ModConfig config = ModConfig.get();
-        if (config.darkMode) {
-            this.image = new Identifier(MOD_ID, "textures/hud/panel_dark.png");
-        } else {
-            this.image = new Identifier(MOD_ID, "textures/hud/panel_light.png");
-        }
+        String postfix = config.darkMode ? "dark" : "light";
+        return new Identifier(MOD_ID, "textures/hud/panel_" + postfix + ".png");
     }
 
     public static NinePatchPanelPainter createNinePatch(CounterPanel panel) {
         Consumer<NinePatch.Builder<Identifier>> configurator = builder -> builder.cornerSize(4).cornerUv(0.25F);
-        TextureRegion<Identifier> region = new TextureRegion<>(panel.image, 0, 0, 1, 1);
+        TextureRegion<Identifier> region = new TextureRegion<>(getPanelId(), 0, 0, 1, 1);
         var builder = NinePatch.builder(region);
         configurator.accept(builder);
         return new NinePatchPanelPainter(builder.build(), panel);
