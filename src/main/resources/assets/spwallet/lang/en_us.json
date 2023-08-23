@@ -2,6 +2,7 @@
   "spwallet.st": "st.",
   "spwallet.b": "b.",
   "spwallet.config.enableMod": "Enable Mod",
+  "spwallet.config.darkMode": "Dark Mode",
   "spwallet.config.simpleMode": "Simple Mode",
   "spwallet.tooltip.simpleMode": "If enabled, it will show the counters separately with no boxes.\n\nBy default, it is built into the interface.\nHowever, if something runs into each other or looks ugly,\nyou can adjust the position of the counters with the Editor Mode.",
   "spwallet.config.isCountInStacks": "Count in Stacks",
