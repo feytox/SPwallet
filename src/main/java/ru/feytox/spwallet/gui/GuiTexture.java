@@ -1,9 +1,6 @@
 package ru.feytox.spwallet.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 import static ru.feytox.spwallet.SPwalletClient.MOD_ID;

@@ -2,7 +2,6 @@ package ru.feytox.spwallet.gui;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import ru.feytox.spwallet.config.ModConfig;
 import ru.feytox.spwallet.counter.ContainerType;
 import ru.feytox.spwallet.counter.ScreenType;

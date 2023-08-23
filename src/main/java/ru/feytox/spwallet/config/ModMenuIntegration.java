@@ -35,6 +35,12 @@ public class ModMenuIntegration implements ModMenuApi {
                         .setSaveConsumer(value -> config.enableMod = value)
                         .build())
                 .addEntry(entryBuilder.startBooleanToggle(
+                                Text.translatable("spwallet.config.darkMode"),
+                                config.darkMode)
+                        .setDefaultValue(false)
+                        .setSaveConsumer(value -> config.darkMode = value)
+                        .build())
+                .addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("spwallet.config.simpleMode"),
                                 config.simpleMode)
                         .setTooltip(Text.translatable("spwallet.tooltip.simpleMode"))
