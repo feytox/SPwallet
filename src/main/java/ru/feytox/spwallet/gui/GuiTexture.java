@@ -1,7 +1,7 @@
 package ru.feytox.spwallet.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -39,9 +39,7 @@ public class GuiTexture {
         this.texture_height = texture_height;
     }
 
-    public void drawTexture(MatrixStack matrices, int x, int y) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderTexture(0, this.image);
-        DrawableHelper.drawTexture(matrices, x, y, this.u1, this.v1, this.width, this.height, this.texture_width, this.texture_height);
+    public void drawTexture(DrawContext context, int x, int y) {
+        context.drawTexture(image, x, y, u1, v1, width, height, texture_width, texture_height);
     }
 }

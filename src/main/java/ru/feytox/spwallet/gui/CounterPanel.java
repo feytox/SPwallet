@@ -1,6 +1,7 @@
 package ru.feytox.spwallet.gui;
 
 import juuxel.libninepatch.NinePatch;
+import juuxel.libninepatch.NinePatch.Builder;
 import juuxel.libninepatch.TextureRegion;
 import net.minecraft.util.Identifier;
 

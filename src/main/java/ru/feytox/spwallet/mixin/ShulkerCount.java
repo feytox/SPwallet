@@ -1,6 +1,7 @@
 package ru.feytox.spwallet.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,7 @@ import ru.feytox.spwallet.gui.CounterHUD;
 public class ShulkerCount {
 
     @Inject(method = "drawBackground", at = @At("RETURN"))
-    public void onDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
+    public void onDrawBackground(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         SPwalletClient.lastScreen = client.currentScreen;
         ModConfig config = ModConfig.get();
@@ -39,8 +40,9 @@ public class ShulkerCount {
                     .add(inventoryCounter)
                     .add(shulkerCounter)
                     .add(SingleCounter.allCount(inventoryCounter, shulkerCounter));
-            hud.draw(matrices);
+            hud.draw(context);
         }
-        SlotsSelector.highlightSlots(matrices);
+
+        SlotsSelector.highlightSlots(context);
     }
 }
