@@ -1,13 +1,12 @@
 package ru.feytox.spwallet.counter;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.ingame.ShulkerBoxScreen;
 import net.minecraft.client.util.Window;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -53,7 +52,7 @@ public class SlotsSelector {
         selectedSlots.clear();
     }
 
-    public static void highlightSlots(MatrixStack matrices) {
+    public static void highlightSlots(DrawContext context) {
         Window window = MinecraftClient.getInstance().getWindow();
         HandledScreen<?> handledScreen = (HandledScreen<?>) MinecraftClient.getInstance().currentScreen;
         if (handledScreen == null) return;
@@ -68,7 +67,7 @@ public class SlotsSelector {
             int x1 = x + slot.x;
             int y1 = y + slot.y;
             Color selectColor = new Color(ModConfig.get().select_color);
-            DrawableHelper.fill(matrices, x1, y1, x1+16, y1+16, ColorHelper.Argb.getArgb(ModConfig.get().select_alpha,
+            context.fill(x1, y1, x1+16, y1+16, ColorHelper.Argb.getArgb(ModConfig.get().select_alpha,
                     selectColor.getRed(), selectColor.getGreen(), selectColor.getBlue()));
         }
     }

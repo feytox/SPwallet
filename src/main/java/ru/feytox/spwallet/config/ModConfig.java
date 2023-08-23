@@ -42,6 +42,7 @@ public class ModConfig implements ConfigData {
 
     // main settings
     public boolean enableMod = true;
+    public boolean darkMode = false;
     public boolean simpleMode = false;
     public boolean isCountInStacks = false;
     public boolean enableShulkerCount = false;

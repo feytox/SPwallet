@@ -1,6 +1,7 @@
 package ru.feytox.spwallet.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +19,7 @@ import ru.feytox.spwallet.gui.CounterHUD;
 public class ContainerCount {
 
     @Inject(method = "drawBackground", at = @At("RETURN"))
-    public void onDrawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo ci) {
+    public void onDrawBackground(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         SPwalletClient.lastScreen = client.currentScreen;
         ModConfig config = ModConfig.get();
@@ -31,8 +32,8 @@ public class ContainerCount {
                     .add(inventoryCounter)
                     .add(chestCounter)
                     .add(SingleCounter.allCount(inventoryCounter, chestCounter));
-            hud.draw(matrices);
+            hud.draw(context);
         }
-        SlotsSelector.highlightSlots(matrices);
+        SlotsSelector.highlightSlots(context);
     }
 }

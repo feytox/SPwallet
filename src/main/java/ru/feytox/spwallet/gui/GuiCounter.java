@@ -2,9 +2,8 @@ package ru.feytox.spwallet.gui;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import ru.feytox.spwallet.config.ModConfig;
@@ -47,14 +46,14 @@ public class GuiCounter {
         this.count_ax = getCountPxLength(count);
     }
 
-    public void drawCount(MatrixStack matrices, int x, int y) {
+    public void drawCount(DrawContext context, int x, int y) {
         Text countText = Text.literal(count);
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         if (containerType.equals(ContainerType.CARD) && OnlineWallet.isBadResponse) {
             countText = Text.literal(count).formatted(Formatting.RED);
-            textRenderer.draw(matrices, countText, x, y, -1);
+            context.drawTextWithShadow(textRenderer, countText, x, y, -1);
         } else {
-            DrawableHelper.drawTextWithShadow(matrices, textRenderer, countText, x, y, -1);
+            context.drawTextWithShadow(textRenderer, countText, x, y, -1);
         }
     }
 

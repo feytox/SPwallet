@@ -3,6 +3,7 @@ package ru.feytox.spwallet.gui;
 import juuxel.libninepatch.NinePatch;
 import juuxel.libninepatch.TextureRegion;
 import net.minecraft.util.Identifier;
+import ru.feytox.spwallet.config.ModConfig;
 
 import java.util.function.Consumer;
 
@@ -16,7 +17,13 @@ public class CounterPanel {
     public CounterPanel(int width, int height) {
         this.width = width;
         this.height = height;
-        this.image = new Identifier(MOD_ID, "textures/hud/panel_light.png");
+
+        ModConfig config = ModConfig.get();
+        if (config.darkMode) {
+            this.image = new Identifier(MOD_ID, "textures/hud/panel_dark.png");
+        } else {
+            this.image = new Identifier(MOD_ID, "textures/hud/panel_light.png");
+        }
     }
 
     public static NinePatchPanelPainter createNinePatch(CounterPanel panel) {
