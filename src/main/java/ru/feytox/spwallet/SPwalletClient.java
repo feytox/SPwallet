@@ -51,7 +51,8 @@ public class SPwalletClient implements ClientModInitializer {
                 online_ticks += 1;
             }
 
-            int cooldown = OnlineWallet.isBadAPI ? 60 : ModConfig.get().reloadCooldown;
+            int cooldown = OnlineWallet.isBadResponse ? 30 : ModConfig.get().reloadCooldown;
+            cooldown = OnlineWallet.isBadAPI ? 60 : cooldown;
             if (online_ticks >= cooldown * 20) {
                 online_ticks = -1;
             }

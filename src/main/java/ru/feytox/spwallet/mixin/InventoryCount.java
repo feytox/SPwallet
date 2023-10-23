@@ -3,7 +3,6 @@ package ru.feytox.spwallet.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +31,7 @@ public class InventoryCount {
                 screenType = ScreenType.INVENTORY_WITH_RECIPE;
             }
 
-            if ((config.showInInventoryCount || config.showOnlineCounter) && SPwalletClient.online_ticks == -1) {
+            if ((config.showInInventoryCount || config.showOnlineCounter) && SPwalletClient.online_ticks == -1 && !config.cardId.isEmpty() && !config.cardToken.isEmpty()) {
                 SPwalletClient.online_ticks = 0;
                 OnlineWallet.reloadBalance();
             }
